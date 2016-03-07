@@ -2,11 +2,26 @@
 
 <!-- data-ng-app (data-* is for HTML5 validation) is a directive to auto-bootstrap an angular application -->
 <!-- You can get this scope in an own file e.g. main|app.js -->
- <html data-ng-app="">
-   <head>
+ <html data-ng-app="raceApp">
+  <head>
     <base href="/">
-     <title>AngularJS</title>
-   </head>
-   <body>
-   </body>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <title>AngularJS</title>
+  </head>
+  <body>
+    <div class="container">
+        <div data-ng-include src="'partials/shared/menu.html'"></div>
+      <div data-ng-view></div>
+    </div>
+  
+    <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular-route.js"></script>
+    <script src="js/libs/angular-local-storage.min.js"></script>
+    <script src="js/app.js"></script>
+  </body>
 </html>
