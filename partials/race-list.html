@@ -1,0 +1,25 @@
+<h3>Lista på alla lopp</h3>
+<div class="col-md-6">
+    <input type="text" ng-model="search" class="search-query" placeholder="Search">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Namn</th>
+            <th>Längd</th>
+            <th>Organisatör</th>
+            <th>Ort</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr data-ng-repeat="race in races | filter:search">
+                <td>{{ race.name }}</td>
+                <td>{{ race.distance }}</td>
+                <td>{{ race.organiser }}</td>
+                <td>{{ race.location.city }}</td>
+                <td><a href="#/race/{{race.id}}">Info</a></td>
+            </tr>
+        </tbody>
+
+    </table>
+</div>

@@ -1,0 +1,49 @@
+<div>
+    <h1>Loppets namn: {{race.name}}</h1>
+    <p>{{race.distance}}</p>
+    <p>{{race.location.city}}</p>
+    <ul data-ng-repeat="tagObject in race.tags">
+        <li>{{tagObject.tag.name}}</li>
+    </ul>
+</div>
+
+
+<!--t.string   "name"-->
+<!--t.date     "date"-->
+<!--t.string   "organiser"-->
+<!--t.string   "web_site"-->
+<!--t.float    "distance"-->
+<!--t.integer  "location_id"-->
+<!--t.datetime "created_at",        null: false-->
+<!--t.datetime "updated_at",        null: false-->
+<!--t.integer  "resource_owner_id"-->
+
+
+<!--{id: 1, name: "Springtime", date: "2016-02-25", organiser: "IFK Helsingborg",…}-->
+<!--created_at-->
+<!--:-->
+<!--"2016-02-25T21:28:35.911Z"-->
+<!--date-->
+<!--:-->
+<!--"2016-02-25"-->
+<!--distance-->
+<!--:-->
+<!--10-->
+<!--id-->
+<!--:-->
+<!--1-->
+<!--location-->
+<!--:-->
+<!--{city: "Helsingborg", longitude: 12.6945121, latitude: 56.0464674,…}-->
+<!--name-->
+<!--:-->
+<!--"Springtime"-->
+<!--organiser-->
+<!--:-->
+<!--"IFK Helsingborg"-->
+<!--tags-->
+<!--:-->
+<!--[{tag: {name: "vårlopp"}}, {tag: {name: "skåne"}}, {tag: {name: "stad"}}, {tag: {name: "milen"}}]-->
+<!--web_site-->
+<!--:-->
+<!--"http://wwww.springtime.se"-->
