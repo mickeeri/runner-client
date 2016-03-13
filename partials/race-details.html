@@ -1,11 +1,19 @@
 <div>
-    <h1>Loppets namn: {{race.name}}</h1>
-    <p>{{race.distance}}</p>
-    <p>{{race.location.city}}</p>
+    <h1>{{race.name}}</h1>
+    <p>Längd: {{race.distance}}</p>
+    <p>Ort: {{race.location.city}}</p>
+    <p>Datum: {{race.date}}</p>
+    <p>Distans: {{race.distance}}</p>
+    <p>Webbsida: {{race.web_site}}</p>
+    <h3>Taggar</h3>
     <ul data-ng-repeat="tagObject in race.tags">
         <li>{{tagObject.tag.name}}</li>
     </ul>
+
+    <a href="/"><< Tillbaka</a>
 </div>
+
+
 
 
 <!--t.string   "name"-->

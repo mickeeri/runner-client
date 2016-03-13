@@ -1,0 +1,32 @@
+<h1>Skapa nytt lopp</h1>
+<form>
+  <div class="form-group">
+    <label for="name">Namn</label>
+    <input type="text" name="name" ng-model="race.name" required>
+  </div>
+
+  <div class="form-group">
+    <label for="organiser">Organisatör</label>
+    <input type="text" name="organiser" ng-model="race.organiser">
+  </div>
+
+  <div class="form-group">
+    <label for="city">Ort</label>
+    <input type="text" name="city" ng-model="race.city">
+  </div>
+
+  <div class="form-group">
+    <label for="date">Datum</label>
+    <input type="date" name="date" ng-model="race.date">
+  </div>
+
+  <div class="form-group">
+    <label for="distance">Längd</label>
+    <input type="text" name="distance" ng-model="race.distance">
+  </div>
+
+
+  <a href="/">Avbryt</a>
+  <button class="btn btn-primary" ng-click="add()">Spara</button>
+  <button class="btn btn-danger" ng-click="destroy()" ng-show="race.id">Ta bort</button>
+</form>
