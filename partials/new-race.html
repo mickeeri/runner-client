@@ -26,6 +26,12 @@
   </div>
 
 
+  <div class="form-group">
+    <label for="tags">Taggar</label>
+    <input type="text" name="tags" ng-model="race.tag_list">
+  </div>
+
+
   <a href="/">Avbryt</a>
   <button class="btn btn-primary" ng-click="add()">Spara</button>
   <button class="btn btn-danger" ng-click="destroy()" ng-show="race.id">Ta bort</button>

@@ -1,5 +1,5 @@
 <h3>Lista på alla lopp</h3>
-<div class="col-md-6">
+<div class="col-md-10">
     <input type="text" ng-model="search" class="search-query" placeholder="Search">
     <table class="table table-striped">
         <thead>
@@ -8,6 +8,7 @@
             <th>Längd</th>
             <th>Organisatör</th>
             <th>Ort</th>
+            <th>Datum</th>
             <th></th>
         </tr>
         </thead>
@@ -17,11 +18,12 @@
                 <td>{{ race.distance }}</td>
                 <td>{{ race.organiser }}</td>
                 <td>{{ race.location.city }}</td>
+                <td>{{race.date}}</td>
                 <td><a href="{{race.race_details}}">Info</a></td>
             </tr>
         </tbody>
 
     </table>
-
     <a href="/new">Lägg till lopp</a>
+    <a href="/login">Logga in</a>
 </div>
