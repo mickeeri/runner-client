@@ -1,6 +1,10 @@
 <h3>Lista på alla lopp</h3>
 <div class="col-md-10">
-    <input type="text" ng-model="search" class="search-query" placeholder="Search">
+    <div class="form-group">
+      <label for="search">Sök på lopp: </label>
+      <input class="form-ctrl" name="search" type="text" ng-model="q" placeholder="Search">
+      <button class="btn btn-primary" ng-click="search()">Sök</button>
+    </div>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -13,7 +17,7 @@
         </tr>
         </thead>
         <tbody>
-            <tr data-ng-repeat="race in races | filter:search">
+            <tr data-ng-repeat="race in races">
                 <td>{{ race.name }}</td>
                 <td>{{ race.distance }}</td>
                 <td>{{ race.organiser }}</td>
@@ -24,6 +28,7 @@
         </tbody>
 
     </table>
+    <a href="{{races.limit}}">Nästa</a>
     <a href="/new">Lägg till lopp</a>
     <a href="/login">Logga in</a>
 </div>

@@ -23,4 +23,15 @@ angular.module('race', ['restangular', 'ngRoute']).
         RestangularProvider.setBaseUrl('http://localhost:3000/api/v1/');
         RestangularProvider.setDefaultRequestParams({ api_key: 'cf46dd8a63811111469ea022d320f51f'});
         RestangularProvider.setDefaultHeaders({ Accept: 'application/json'});
+        RestangularProvider.addResponseInterceptor(function(data, operation, what, url, respond, deferred) {
+          var extracedData;
+          if (operation === "getList") {
+            extracedData = data.races;
+            extracedData.offset = data.offset;
+            extracedData.limit = data.limit;
+          } else {
+            extracedData = data;
+          }
+          return extracedData;
+        });
     });
