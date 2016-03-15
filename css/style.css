@@ -29,3 +29,20 @@ label {
 .buttons button {
   margin-left: 10px;
 }
+
+/*TABLE*/
+
+.table-container {
+  min-height: 333px;
+}
+
+/*TAGS*/
+
+.tag-list label {
+  display: inline;
+  padding-left: 2px;
+}
+
+.list-inline {
+  margin-bottom: 0;
+}
