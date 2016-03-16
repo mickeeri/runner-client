@@ -1,50 +1,52 @@
-<h3>Lista på alla lopp</h3>
 <div class="col-md-12">
-  <div class="form-group">
-    <label for="search">Sök på lopp: </label>
-    <input class="form-ctrl" name="search" type="text" ng-model="q" placeholder="Search">
-    <button class="btn btn-primary" ng-click="search()">Sök</button>
+  <div class="form-group panel panel-default">
+    <div class="panel-body">
+      <label for="search">Sök på lopp: </label>
+      <input class="form-ctrl" name="search" type="text" ng-model="q">
+      <button class="btn btn-primary" ng-click="search()">Sök</button>
+      <button class="btn btn-default" ng-click="reset()">Återställ</button>
+    </div>
   </div>
-  <div class="tag-list row">
-    <label ng-repeat="tag in races.tags">
-      <input type="checkbox" checklist-model="selectedTags" checklist-value="tag.name" checklist-change="imChanged()">{{tag.name}}
-    </label>
+  <div class="tag-list panel panel-default">
+    <div class="panel-body">
+      <label ng-repeat="tag in races.tags">
+        <input type="checkbox" checklist-model="selectedTags" checklist-value="tag.name" checklist-change="imChanged()">{{tag.name}}
+      </label>
+    </div>
   </div>
-  <div class="row">
-    <a href="/new">Lägg till lopp</a>
-    <a href="/login">Logga in</a>
+  <div class="table-container panel panel-default">
+    <div class="panel-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+              <th>Namn</th>
+              <th>Längd</th>
+              <th>Organisatör</th>
+              <th>Ort</th>
+              <th>Datum</th>
+              <th>Taggar</th>
+              <th></th>
+          </tr>
+        </thead>
+          <tbody>
+              <tr data-ng-repeat="race in races">
+                  <td>{{ race.name }}</td>
+                  <td>{{ race.distance }}</td>
+                  <td>{{ race.organiser }}</td>
+                  <td>{{ race.location.city }}</td>
+                  <td>{{race.date}}</td>
+                  <td>
+                    <ul class="list-inline">
+                      <li data-ng-repeat="tag in race.tags"><span class="badge">{{tag.name}}</span></li>
+                    </ul>
+                  </td>
+                  <td><a href="{{race.race_details}}">Info</a></td>
+              </tr>
+          </tbody>
+      </table>
+    </div>
   </div>
-  <div class="table-container">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-            <th>Namn</th>
-            <th>Längd</th>
-            <th>Organisatör</th>
-            <th>Ort</th>
-            <th>Datum</th>
-            <th>Taggar</th>
-            <th></th>
-        </tr>
-      </thead>
-        <tbody>
-            <tr data-ng-repeat="race in races">
-                <td>{{ race.name }}</td>
-                <td>{{ race.distance }}</td>
-                <td>{{ race.organiser }}</td>
-                <td>{{ race.location.city }}</td>
-                <td>{{race.date}}</td>
-                <td>
-                  <ul class="list-inline">
-                    <li data-ng-repeat="tag in race.tags"><span class="badge">{{tag.name}}</span></li>
-                  </ul>
-                </td>
-                <td><a href="{{race.race_details}}">Info</a></td>
-            </tr>
-        </tbody>
-    </table>
-  </div>
-  <div class="row">
+  <div class="row pagination">
     <button class="btn btn-default btn-sm" ng-disabled="races.previous_offset === undefined"
       ng-click=previous()><< Tillbaka</button>
     <button class="btn btn-default btn-sm" ng-disabled="races.next_offset === undefined"

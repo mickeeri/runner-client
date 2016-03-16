@@ -1,13 +1,16 @@
 /* LAYOUT */
 
 main {
-  margin-top: 90px;
   padding: 40px;
   min-height: 50%;
 }
 
 footer {
   text-align: left;
+}
+
+nav {
+  margin-top: 20px;
 }
 
 /* FORMS */
@@ -33,7 +36,11 @@ label {
 /*TABLE*/
 
 .table-container {
-  min-height: 333px;
+  min-height: 385px;
+}
+
+.pagination {
+  float: right;
 }
 
 /*TAGS*/
@@ -41,8 +48,39 @@ label {
 .tag-list label {
   display: inline;
   padding-left: 2px;
+  cursor: pointer;
 }
 
 .list-inline {
   margin-bottom: 0;
+}
+
+input[type='checkbox'] {
+  margin-right: 3px;
+}
+
+/*LOGIN PAGE*/
+.login-panel {
+  padding: 0;
+}
+
+.login-panel .panel-body {
+  padding: 20px 40px;
+}
+
+.login-panel input {
+  width: 100%;
+}
+
+.login-panel .button-group {
+  text-align: right;
+}
+
+.login-panel .button-group button {
+  margin-left: 10px;
+}
+
+.panel-title {
+  font-weight: 600;
+  font-size: 18px;
 }

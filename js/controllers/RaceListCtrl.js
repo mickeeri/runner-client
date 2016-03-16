@@ -1,4 +1,4 @@
-angular.module('race').controller('RaceListCtrl', function ($scope, Restangular) {
+angular.module('raceApp').controller('RaceListCtrl', function ($scope, Restangular) {
 
     $scope.selectedTags = [];
     // Setting default limit and offset for paging.
@@ -23,6 +23,11 @@ angular.module('race').controller('RaceListCtrl', function ($scope, Restangular)
     }
 
     $scope.imChanged = function() {
+      makeRequest($scope);
+    }
+
+    $scope.reset = function() {
+      $scope.q = '';
       makeRequest($scope);
     }
 

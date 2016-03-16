@@ -1,4 +1,4 @@
-angular.module('race', ['restangular', 'ngRoute', 'checklist-model']).
+angular.module('raceApp', ['restangular', 'ngRoute', 'checklist-model', 'LocalStorageModule']).
     config(function ($routeProvider, $locationProvider, RestangularProvider) {
         $routeProvider.
             when('/', {
@@ -37,4 +37,11 @@ angular.module('race', ['restangular', 'ngRoute', 'checklist-model']).
           }
           return extracedData;
         });
+    })
+    .config(function(localStorageServiceProvider) {
+      // Configuration for angular-local-storage module.
+      localStorageServiceProvider
+        .setPrefix('raceApp')
+        .setStorageType('sessionStorage')
+        .setNotify(true, true)
     });
