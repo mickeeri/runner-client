@@ -18,6 +18,7 @@ angular.module('raceApp').controller('CreateRaceCtrl', function ($scope, $locati
     }, function(response) {
       // TODO: skriv ut felmeddelande.
       console.log(response.data.developer_message);
+      console.log(response.data.user_message);
     });
   }
 });

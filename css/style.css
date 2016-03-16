@@ -24,6 +24,13 @@ label {
   width: 300px;
 }
 
+.form-control {
+  height: 28px;
+  padding-left: 5px;
+  width: 300px;
+  border-radius: 0;
+}
+
 .buttons {
   width: 300px;
   text-align: right;

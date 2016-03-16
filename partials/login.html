@@ -2,7 +2,6 @@
    <button type="button" class="close" data-ng-click="switchBool('showErrorAlert')" >×</button>
    {{errorTextAlert}}
 </div>
-
 <p>resourceowner@example.com</p>
 <div class="col-md-6 col-md-offset-3 panel panel-default login-panel">
   <div class="panel-heading">
@@ -10,18 +9,21 @@
   </div>
   <div class="panel-body">
     <form name="loginForm">
-        <div class="form-group">
-          <label for="email">E-post</label>
-          <input class="form-ctrl" type="text" ng-model="owner.email">
-        </div>
-        <div class="form-group">
-          <label for="password">Lösenord</label>
-          <input class="form-ctrl" type="password" ng-model="owner.password" required>
-        </div>
-        <div class="button-group">
-          <a href="/">Avbryt</a>
-          <button class="btn btn-primary" ng-click="login()" ng-disabled="loginForm.$invalid">Logga in</button>
-        </div>
+      <div class="form-group" ng-class="{'has-error':loginForm.email.$invalid && loginForm.email.$touched}">
+        <label for="email">E-post</label>
+        <input class="form-control" type="email" ng-model="owner.email" name="email" required">
+        <span class="help-block" ng-show="loginForm.email.$error.email && loginForm.email.$touched">E-postadress är ogiltig.</span>
+        <span class="help-block" ng-show="loginForm.email.$error.required && loginForm.email.$touched">Du måste ange en mailadress.</span>
+      </div>
+      <div class="form-group" ng-class="{'has-error':loginForm.password.$invalid && loginForm.password.$touched}">
+        <label for="password">Lösenord</label>
+        <input class="form-control" type="password" name="password" ng-model="owner.password" required>
+        <span class="help-block" ng-show="loginForm.password.$invalid && loginForm.password.$touched">Du måste ange ett lösenord.</span>
+      </div>
+      <div class="button-group">
+        <a href="/">Avbryt</a>
+        <button class="btn btn-primary" ng-click="login()" ng-disabled="loginForm.$invalid">Logga in</button>
+      </div>
     </form>
   </div>
 </div>

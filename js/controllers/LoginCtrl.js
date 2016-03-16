@@ -5,7 +5,6 @@ angular.module('raceApp').controller('LoginCtrl', function ($scope, $location, R
   $scope.login = function() {
     Restangular.all('auth_token').post({'auth' : $scope.owner}).then(function(response) {
       var savedToLocalStorage = localStorageService.set('jwt', response.jwt);
-      console.log(savedToLocalStorage);
       // Redirect to start page if successfully saved jwt in local storage.
       if (savedToLocalStorage) {
         $location.path('/');
@@ -21,6 +20,6 @@ angular.module('raceApp').controller('LoginCtrl', function ($scope, $location, R
   }
 
   $scope.switchBool = function(value) {
-     $scope[value] = !$scope[value];
+    $scope[value] = !$scope[value];
   };
 });
