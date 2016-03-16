@@ -1,4 +1,4 @@
-angular.module('raceApp').controller('RaceListCtrl', function ($scope, Restangular) {
+angular.module('raceApp').controller('RaceListCtrl', function ($scope, Restangular, authService) {
 
     $scope.selectedTags = [];
     // Setting default limit and offset for paging.
@@ -6,6 +6,11 @@ angular.module('raceApp').controller('RaceListCtrl', function ($scope, Restangul
     $scope.offset = 0;
 
     // Making the first get request to api.
+
+
+    $scope.loggedIn = authService.isLoggedIn();
+
+    //console.log(authService.isLoggedIn());
     makeRequest($scope);
 
     $scope.search = function() {
@@ -45,7 +50,6 @@ angular.module('raceApp').controller('RaceListCtrl', function ($scope, Restangul
         queryParams.q = $scope.q;
       }
 
-      console.log(queryParams);
 
       Restangular.all('races').getList(queryParams).then(function(result) {
         $scope.races = result;

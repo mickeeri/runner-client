@@ -1,4 +1,6 @@
-angular.module('raceApp').controller('LoginCtrl', function ($scope, $location, Restangular, localStorageService) {
+angular.module('raceApp').controller('LoginCtrl', function ($scope, $location, Restangular, localStorageService, authService) {
+
+// TODO: loginmethod i authSerice.
 
   $scope.login = function() {
     Restangular.all('auth_token').post({'auth' : $scope.owner}).then(function(response) {
@@ -14,6 +16,7 @@ angular.module('raceApp').controller('LoginCtrl', function ($scope, $location, R
     }, function(response) {
       $scope.errorTextAlert = "Felaktiga uppgifter. Kunde inte logga in.";
       $scope.showErrorAlert = true;
+      authService.logout();
     });
   }
 

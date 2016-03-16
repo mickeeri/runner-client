@@ -1,6 +1,8 @@
-<nav class="navbar navbar-default">
+<nav ng-controller="authController" class="navbar navbar-default">
   <div class="container-fluid">
     <a href="/" class="navbar-brand">Springlopp i Sverige</a>
-    <a href="/login" type="button" class="btn btn-default navbar-btn pull-right">Logga in</a>
+    <a ng-if="!isLoggedIn()" href="/login" class="btn btn-default navbar-btn pull-right">Logga in</a>
+    <a href="#" ng-click="logout()" ng-if="isLoggedIn()" class="btn btn-default navbar-btn pull-right">Logga ut</a>
+    <a href="/new" ng-if="isLoggedIn()" class="btn btn-default navbar-btn pull-right">Lägg till nytt lopp</a>
   </div>
 </nav>
