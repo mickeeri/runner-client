@@ -1,6 +1,10 @@
-angular.module('raceApp').controller('LoginCtrl', function ($scope, $location, Restangular, localStorageService, authService) {
+angular
+  .module('raceApp')
+  .controller('LoginCtrl', LoginCtrl);
 
-// TODO: loginmethod i authSerice.
+function LoginCtrl($scope, $location, Restangular, localStorageService, authService) {
+
+// TODO: login in service method.
 
   $scope.switchBool = function(value) {
     $scope[value] = !$scope[value];
@@ -27,4 +31,4 @@ angular.module('raceApp').controller('LoginCtrl', function ($scope, $location, R
       authService.logout();
     });
   }
-});
+}

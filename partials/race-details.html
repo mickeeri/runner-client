@@ -1,5 +1,7 @@
-<div ng-include src="'partials/shared/error-message.html'" ng-show="showErrorAlert"></div>
-<div ng-include src="'partials/shared/success-message.html'" ng-show="showSuccessAlert"></div>
+<div class="row">
+  <div ng-include src="'partials/shared/error-message.html'" ng-show="showErrorAlert"></div>
+  <div ng-include src="'partials/shared/success-message.html'" ng-show="showSuccessAlert"></div>
+</div>
 <!-- TODO: one partial for both error and success -->
 <div class="row" ng-show="isLoggedIn()">
   <div class="col-md-12 panel panel-default race-menu">
@@ -22,7 +24,7 @@
       </div>
 
       <div class="form-group">
-        <label for="organiser">Organisatör: </label>
+        <label for="organiser">Arrangör: </label>
         <input class="form-control" type="text" name="organiser" ng-model="race.organiser" required>
       </div>
 
@@ -47,7 +49,7 @@
       </div>
 
       <div class="button-group">
-        <a href="/">Avbryt</a>
+        <a href="#" ng-click="wantsToEdit = false">Avbryt</a>
         <button class="btn btn-primary" ng-click="edit()"
           ng-disabled="editRaceForm.$invalid">Spara</button>
       </div>
@@ -55,72 +57,30 @@
   </div>
 
   <!-- Show this if not edit -->
-  <div ng-show="!wantsToEdit" class="col-md-6 panel panel-default login-panel">
+  <div ng-show="!wantsToEdit" class="col-md-6 panel panel-default race-panel">
     <div class="panel-heading">
       <h2 class="panel-title">{{race.name}}</h2>
     </div>
     <ul class="list-group">
+      <li class="list-group-item">Arrangör: {{race.organiser}}</li>
       <li class="list-group-item">Ort: {{race.city}}</li>
       <li class="list-group-item">Datum: {{race.date | date:'yyyy-MM-dd'}}</li>
       <li class="list-group-item">Distans: {{race.distance}} km</li>
-      <li class="list-group-item">Webbsida: {{race.web_site}}</li>
-      <li ng-show="race.tags.length > 0" class="list-group-item">
-        <ul class="list-inline">
-          <li data-ng-repeat="tag in race.tags"><span class="badge">{{tag.tag.name}}</span></li>
-        </ul>
-      </li>
+      <li class="list-group-item"><a href="{{race.web_site}}">Loppets webbsida</a></li>
+      <li class="list-group-item">{{race.tag_list}}</li>
     </ul>
   </div>
   <div class="col-md-6 panel panel-default map">
-    <div class="panel-body">
-      karta här
+    <div id="map" class="panel-body">
     </div>
   </div>
 </div>
-<div class="row">
-  <a href="/"><< Tillbaka</a>
+
+<racemap></racemap>
+
 </div>
-
-
-
-
-
-<!--t.string   "name"-->
-<!--t.date     "date"-->
-<!--t.string   "organiser"-->
-<!--t.string   "web_site"-->
-<!--t.float    "distance"-->
-<!--t.integer  "location_id"-->
-<!--t.datetime "created_at",        null: false-->
-<!--t.datetime "updated_at",        null: false-->
-<!--t.integer  "resource_owner_id"-->
-
-
-<!--{id: 1, name: "Springtime", date: "2016-02-25", organiser: "IFK Helsingborg",…}-->
-<!--created_at-->
-<!--:-->
-<!--"2016-02-25T21:28:35.911Z"-->
-<!--date-->
-<!--:-->
-<!--"2016-02-25"-->
-<!--distance-->
-<!--:-->
-<!--10-->
-<!--id-->
-<!--:-->
-<!--1-->
-<!--location-->
-<!--:-->
-<!--{city: "Helsingborg", longitude: 12.6945121, latitude: 56.0464674,…}-->
-<!--name-->
-<!--:-->
-<!--"Springtime"-->
-<!--organiser-->
-<!--:-->
-<!--"IFK Helsingborg"-->
-<!--tags-->
-<!--:-->
-<!--[{tag: {name: "vårlopp"}}, {tag: {name: "skåne"}}, {tag: {name: "stad"}}, {tag: {name: "milen"}}]-->
-<!--web_site-->
-<!--:-->
-<!--"http://wwww.springtime.se"-->
+<div class="row">
+  <a href="/" type="button" class="btn btn-default" aria-label="Left Align">
+    <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+  </a>
+</div>

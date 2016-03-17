@@ -1,5 +1,8 @@
-angular.module('raceApp').controller('authController', function ($scope, localStorageService, authService) {
+angular
+  .module('raceApp')
+  .controller('MainCtrl', MainCtrl);
 
+function MainCtrl($scope, localStorageService, authService) {
 
   $scope.errorTextAlert;
   $scope.showErrorAlert;
@@ -13,8 +16,4 @@ angular.module('raceApp').controller('authController', function ($scope, localSt
     authService.logout();
   }
 
-
-
-
-
-});
+}

@@ -1,70 +1,77 @@
-angular.module('raceApp').controller('RaceListCtrl', function ($scope, Restangular, authService) {
+angular
+  .module('raceApp')
+  .controller('RaceListCtrl', RaceListCtrl);
 
-  $scope.selectedTags = [];
+//RaceListCtrl.$inject = ['restangular', 'authService'];
+
+function RaceListCtrl(Restangular, authService) {
+
+  var vm = this;
+
+  // Array of selected tags.
+  vm.selectedTags = [];
   // Setting default limit and offset for paging.
-  $scope.limit = 8;
-  $scope.offset = 0;
+  vm.limit = 8;
+  vm.offset = 0;
 
-  // Making the first get request to api.
+  // Initial request to api.
+  makeRequest(vm);
 
-  // $scope.loggedIn = authService.isLoggedIn();
-
-  makeRequest($scope);
-
-  $scope.search = function() {
-    makeRequest($scope)
+  vm.search = function() {
+    makeRequest(vm)
   }
 
-  $scope.next = function() {
-    $scope.offset = $scope.races.next_offset;
-    makeRequest($scope);
+  vm.next = function() {
+    vm.offset = vm.races.next_offset;
+    makeRequest(vm);
   }
 
-  $scope.previous = function() {
-    $scope.offset = $scope.races.previous_offset;
-    makeRequest($scope);
+  vm.previous = function() {
+    vm.offset = vm.races.previous_offset;
+    makeRequest(vm);
   }
 
-  $scope.checkboxHasChanged = function() {
-    $scope.offset = 0;
-    makeRequest($scope);
+  vm.checkboxHasChanged = function() {
+    vm.offset = 0;
+    makeRequest(vm);
   }
 
-  $scope.reset = function() {
-    $scope.q = '';
-    makeRequest($scope);
+  vm.reset = function() {
+    vm.q = '';
+    makeRequest(vm);
   }
 
-  $scope.switchBool = function(value) {
-     $scope[value] = !$scope[value];
+  vm.switchBool = function(value) {
+     vm[value] = !vm[value];
   };
 
-  function makeRequest($scope) {
-
+  function makeRequest(vm) {
     var queryParams = new Object();
 
     // Setting query parameters.
-    if ($scope.selectedTags.length > 0) {
-      queryParams.tags = $scope.selectedTags.join('+');
+    if (vm.selectedTags.length > 0) {
+      queryParams.tags = vm.selectedTags.join('+');
     }
 
-    queryParams.offset = $scope.offset;
-    queryParams.limit = $scope.limit;
+    queryParams.offset = vm.offset;
+    queryParams.limit = vm.limit;
 
-    if ($scope.q != undefined) {
-      queryParams.q = $scope.q;
+    if (vm.q != undefined) {
+      queryParams.q = vm.q;
     }
 
     Restangular.all('races').getList(queryParams).then(function(result) {
-      $scope.races = result;
+
+      vm.races = result;
+
     }, function(response) {
       // Show errors.
       if (response.data) {
-        $scope.errorTextAlert = response.data.user_message;
+        vm.errorTextAlert = response.data.user_message;
       } else {
-        $scope.errorTextAlert = "Fel uppstod när data skulle hämtas från servern.";
+        vm.errorTextAlert = "Fel uppstod när data skulle hämtas från servern.";
       }
-      $scope.showErrorAlert = true;
+      vm.showErrorAlert = true;
     });
   }
-});
+}

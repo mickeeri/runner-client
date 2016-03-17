@@ -1,13 +1,14 @@
-angular.module('raceApp').controller('CreateRaceCtrl', function ($scope, $location, Restangular, authService) {
+angular
+  .module('raceApp')
+  .controller('CreateRaceCtrl', CreateRaceCtrl);
 
-  //var token = authService.getAuthToken();
+function CreateRaceCtrl($scope, $location, Restangular, authService) {
 
   $scope.switchBool = function(value) {
     $scope[value] = !$scope[value];
   };
 
   $scope.add = function() {
-    //console.log(authService.getAuthToken());
     var authHeaderValue = 'Bearer '+authService.getAuthToken();
 
     Restangular.all('races').post($scope.race, '', {'Authorization': authHeaderValue}).then(function(race) {
@@ -22,4 +23,4 @@ angular.module('raceApp').controller('CreateRaceCtrl', function ($scope, $locati
       $scope.showErrorAlert = true;
     });
   }
-});
+}

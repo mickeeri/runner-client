@@ -1,9 +1,9 @@
-<div class="col-md-12">
+<div class="col-md-12" ng-controller="RaceListCtrl as vm">
   <div ng-include src="'partials/shared/error-message.html'" ng-show="showErrorAlert"></div>
   <div class="panel panel-default form-inline">
     <div class="panel-body form-group">
       <label for="search">Sök på lopp: </label>
-      <input class="form-control" name="search" type="search" ng-model="q">
+      <input class="form-control" name="search" type="search" ng-model="q" auto-focus code="13" dl-key-code="search()">
       <button class="btn btn-primary" ng-click="search()">Sök</button>
       <button class="btn btn-default" ng-click="reset()">Återställ</button>
     </div>
@@ -21,7 +21,7 @@
         <thead>
           <tr>
               <th>Namn</th>
-              <th>Längd</th>
+              <th>Distans</th>
               <th>Organisatör</th>
               <th>Ort</th>
               <th>Datum</th>
@@ -30,12 +30,12 @@
           </tr>
         </thead>
           <tbody>
-              <tr data-ng-repeat="race in races">
+              <tr data-ng-repeat="race in vm.races">
                   <td>{{ race.name }}</td>
-                  <td>{{ race.distance }}</td>
+                  <td>{{ race.distance }} km</td>
                   <td>{{ race.organiser }}</td>
-                  <td>{{ race.location.city }}</td>
-                  <td>{{race.date}}</td>
+                  <td>{{ race.city }}</td>
+                  <td>{{ race.date }}</td>
                   <td>
                     <ul class="list-inline">
                       <li data-ng-repeat="tag in race.tag_list"><span class="badge">{{tag}}</span></li>
