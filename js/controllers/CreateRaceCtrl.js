@@ -12,7 +12,9 @@ function CreateRaceCtrl($scope, $location, Restangular, authService) {
     var authHeaderValue = 'Bearer '+authService.getAuthToken();
 
     Restangular.all('races').post($scope.race, '', {'Authorization': authHeaderValue}).then(function(race) {
-      $location.path('/');
+      $scope.successTextAlert = "Lopp skapat!";
+      $scope.showSuccessAlert = true;
+      $location.path(race.self_path);
     }, function(response) {
       // Show errors.
       if (response.data) {

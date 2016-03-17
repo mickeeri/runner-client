@@ -4,8 +4,6 @@ angular
 
 function LoginCtrl($scope, $location, Restangular, localStorageService, authService) {
 
-// TODO: login in service method.
-
   $scope.switchBool = function(value) {
     $scope[value] = !$scope[value];
   };

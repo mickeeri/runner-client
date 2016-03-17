@@ -4,74 +4,70 @@ angular
 
 //RaceListCtrl.$inject = ['restangular', 'authService'];
 
-function RaceListCtrl(Restangular, authService) {
-
-  var vm = this;
+function RaceListCtrl($scope, Restangular, authService) {
 
   // Array of selected tags.
-  vm.selectedTags = [];
+  $scope.selectedTags = [];
   // Setting default limit and offset for paging.
-  vm.limit = 8;
-  vm.offset = 0;
+  $scope.limit = 8;
+  $scope.offset = 0;
 
   // Initial request to api.
-  makeRequest(vm);
+  makeRequest($scope);
 
-  vm.search = function() {
-    makeRequest(vm)
+  $scope.search = function() {
+    makeRequest($scope)
   }
 
-  vm.next = function() {
-    vm.offset = vm.races.next_offset;
-    makeRequest(vm);
+  $scope.next = function() {
+    $scope.offset = $scope.races.next_offset;
+    makeRequest($scope);
   }
 
-  vm.previous = function() {
-    vm.offset = vm.races.previous_offset;
-    makeRequest(vm);
+  $scope.previous = function() {
+    $scope.offset = $scope.races.previous_offset;
+    makeRequest($scope);
   }
 
-  vm.checkboxHasChanged = function() {
-    vm.offset = 0;
-    makeRequest(vm);
+  $scope.checkboxHasChanged = function() {
+    $scope.offset = 0;
+    makeRequest($scope);
   }
 
-  vm.reset = function() {
-    vm.q = '';
-    makeRequest(vm);
+  $scope.reset = function() {
+    $scope.q = '';
+    makeRequest($scope);
   }
 
-  vm.switchBool = function(value) {
-     vm[value] = !vm[value];
+  $scope.switchBool = function(value) {
+     $scope[value] = !$scope[value];
   };
 
-  function makeRequest(vm) {
+  function makeRequest($scope) {
     var queryParams = new Object();
 
     // Setting query parameters.
-    if (vm.selectedTags.length > 0) {
-      queryParams.tags = vm.selectedTags.join('+');
+    if ($scope.selectedTags.length > 0) {
+      queryParams.tags = $scope.selectedTags.join('+');
     }
 
-    queryParams.offset = vm.offset;
-    queryParams.limit = vm.limit;
+    queryParams.offset = $scope.offset;
+    queryParams.limit = $scope.limit;
 
-    if (vm.q != undefined) {
-      queryParams.q = vm.q;
+    if ($scope.q != undefined) {
+      queryParams.q = $scope.q;
     }
 
     Restangular.all('races').getList(queryParams).then(function(result) {
-
-      vm.races = result;
-
+      $scope.races = result;
     }, function(response) {
       // Show errors.
       if (response.data) {
-        vm.errorTextAlert = response.data.user_message;
+        $scope.errorTextAlert = response.data.user_message;
       } else {
-        vm.errorTextAlert = "Fel uppstod när data skulle hämtas från servern.";
+        $scope.errorTextAlert = "Fel uppstod när data skulle hämtas från servern.";
       }
-      vm.showErrorAlert = true;
+      $scope.showErrorAlert = true;
     });
   }
 }

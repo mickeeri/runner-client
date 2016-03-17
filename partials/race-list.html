@@ -1,5 +1,6 @@
-<div class="col-md-12" ng-controller="RaceListCtrl as vm">
+<div class="col-md-12">
   <div ng-include src="'partials/shared/error-message.html'" ng-show="showErrorAlert"></div>
+  <div ng-include src="'partials/shared/success-message.html'" ng-show="showSuccessAlert"></div>
   <div class="panel panel-default form-inline">
     <div class="panel-body form-group">
       <label for="search">Sök på lopp: </label>
@@ -30,7 +31,7 @@
           </tr>
         </thead>
           <tbody>
-              <tr data-ng-repeat="race in vm.races">
+              <tr data-ng-repeat="race in races">
                   <td>{{ race.name }}</td>
                   <td>{{ race.distance }} km</td>
                   <td>{{ race.organiser }}</td>

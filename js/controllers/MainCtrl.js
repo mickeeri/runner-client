@@ -15,5 +15,4 @@ function MainCtrl($scope, localStorageService, authService) {
   $scope.logout = function() {
     authService.logout();
   }
-
 }

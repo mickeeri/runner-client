@@ -5,7 +5,6 @@ angular
         when('/', {
           controller: 'RaceListCtrl',
           templateUrl: 'partials/race-list.html',
-          controllerAs: 'vm'
         }).
         when('/race/:id', {
             controller: 'RaceDetailsCtrl',

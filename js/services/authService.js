@@ -11,5 +11,5 @@ angular.module('raceApp').factory('authService', function(localStorageService) {
     logout: function() {
       localStorageService.remove('jwt');
     }
-  } // TODO: ta bort strängberoende jwt. 
+  }
 });

@@ -4,8 +4,9 @@ angular
 
 //RaceDetailsCtrl.$inject = ['$routeParams', 'restangular', 'authService']
 
-function RaceDetailsCtrl($routeParams, Restangular, authService) {
-  // Get one race with restanuglar.
+function RaceDetailsCtrl($scope, $location, $routeParams, Restangular, authService) {
+
+  // Get one race with restangular.
   Restangular.one('races', $routeParams.id).get().then(function(result){
       // Converting to datetime object.
       result.date = new Date(result.date);
@@ -36,7 +37,6 @@ function RaceDetailsCtrl($routeParams, Restangular, authService) {
       $scope.showSuccessAlert = true;
       generateMap(result.longitude, result.latitude);
     }, function(response) {
-      console.log(response);
       // Show errors.
       if (response.data) {
         $scope.errorTextAlert = response.data.user_message;
@@ -45,15 +45,15 @@ function RaceDetailsCtrl($routeParams, Restangular, authService) {
       }
       $scope.wantsToEdit = false;
       $scope.showErrorAlert = true;
-
     });
   }
 
   $scope.delete = function() {
     $scope.race.remove('', {'Authorization': authHeaderValue}).then(function(result) {
-      $location.path('/');
       $scope.successTextAlert = "Lopp raderat!";
       $scope.showSuccessAlert = true;
+      $location.path('/');
+
     }, function(response) {
       // Show errors.
       if (response.data) {
