@@ -2,23 +2,24 @@ angular.module('raceApp').controller('CreateRaceCtrl', function ($scope, $locati
 
   //var token = authService.getAuthToken();
 
-  //console.log(token);
+  $scope.switchBool = function(value) {
+    $scope[value] = !$scope[value];
+  };
 
   $scope.add = function() {
     //console.log(authService.getAuthToken());
-
     var authHeaderValue = 'Bearer '+authService.getAuthToken();
 
-    console.log(authHeaderValue);
-
-    Restangular.all('races').post({'race':$scope.race}, {}, {'Authorization': authHeaderValue}).then(function(race) {
-      console.log("all ok");
-      // TODO: Redirect till loppets sida istället.
+    Restangular.all('races').post($scope.race, '', {'Authorization': authHeaderValue}).then(function(race) {
       $location.path('/');
     }, function(response) {
-      // TODO: skriv ut felmeddelande.
-      console.log(response.data.developer_message);
-      console.log(response.data.user_message);
+      // Show errors.
+      if (response.data) {
+        $scope.errorTextAlert = response.data.user_message;
+      } else {
+        $scope.errorTextAlert = "Ett fel uppstod när loppet skulle raderas.";
+      }
+      $scope.showErrorAlert = true;
     });
   }
 });

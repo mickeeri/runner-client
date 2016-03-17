@@ -1,8 +1,5 @@
 <div class="col-md-12">
-  <div class="alert alert-danger" ng-show="showErrorAlert">
-    <button type="button" class="close" data-ng-click="switchBool('showErrorAlert')" >×</button>
-    {{errorTextAlert}}
-  </div>
+  <div ng-include src="'partials/shared/error-message.html'" ng-show="showErrorAlert"></div>
   <div class="form-group panel panel-default">
     <div class="panel-body">
       <label for="search">Sök på lopp: </label>
@@ -14,7 +11,7 @@
   <div class="tag-list panel panel-default">
     <div class="panel-body">
       <label ng-repeat="tag in races.tags">
-        <input type="checkbox" checklist-model="selectedTags" checklist-value="tag.name" checklist-change="imChanged()">{{tag.name}}
+        <input type="checkbox" checklist-model="selectedTags" checklist-value="tag.name" checklist-change="checkboxHasChanged()">{{tag.name}}
       </label>
     </div>
   </div>
@@ -41,10 +38,10 @@
                   <td>{{race.date}}</td>
                   <td>
                     <ul class="list-inline">
-                      <li data-ng-repeat="tag in race.tags"><span class="badge">{{tag.name}}</span></li>
+                      <li data-ng-repeat="tag in race.tag_list"><span class="badge">{{tag}}</span></li>
                     </ul>
                   </td>
-                  <td><a href="{{race.race_details}}">Info</a></td>
+                  <td><a href="{{race.self_path}}">Info</a></td>
               </tr>
           </tbody>
       </table>

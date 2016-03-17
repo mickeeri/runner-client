@@ -37,6 +37,21 @@ angular.module('raceApp', ['restangular', 'ngRoute', 'checklist-model', 'LocalSt
           }
           return extracedData;
         });
+        RestangularProvider.setRestangularFields({
+          selfLink: "self_url"
+        });
+
+        RestangularProvider.setRequestInterceptor(function(elem, operation, what) {
+
+          if (operation === 'put') {
+            // Elements that I don't want in put request.
+            elem.self_path = undefined;
+            elem.latitude = undefined;
+            elem.longitude = undefined;
+            return elem;
+          }
+          return elem;
+        })
     })
     .config(function(localStorageServiceProvider) {
       // Configuration for angular-local-storage module.

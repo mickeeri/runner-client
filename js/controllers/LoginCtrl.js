@@ -2,6 +2,10 @@ angular.module('raceApp').controller('LoginCtrl', function ($scope, $location, R
 
 // TODO: loginmethod i authSerice.
 
+  $scope.switchBool = function(value) {
+    $scope[value] = !$scope[value];
+  };
+
   $scope.login = function() {
     Restangular.all('auth_token').post({'auth' : $scope.owner}).then(function(response) {
       var savedToLocalStorage = localStorageService.set('jwt', response.jwt);
@@ -13,13 +17,14 @@ angular.module('raceApp').controller('LoginCtrl', function ($scope, $location, R
         $scope.showErrorAlert = true;
       }
     }, function(response) {
-      $scope.errorTextAlert = "Felaktiga uppgifter. Kunde inte logga in.";
+      // 404 best practice for failed authentification according to knock rails gem creator.
+      if (response.status === 404) {
+        $scope.errorTextAlert = "Inloggning misslyckades. Felaktiga uppgifter.";
+      } else {
+        $scope.errorTextAlert = "Serverfel. Försök igen senare.";
+      }
       $scope.showErrorAlert = true;
       authService.logout();
     });
   }
-
-  $scope.switchBool = function(value) {
-    $scope[value] = !$scope[value];
-  };
 });

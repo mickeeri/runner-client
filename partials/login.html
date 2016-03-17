@@ -1,7 +1,4 @@
-<div class="alert alert-danger" ng-show="showErrorAlert">
-   <button type="button" class="close" data-ng-click="switchBool('showErrorAlert')" >×</button>
-   {{errorTextAlert}}
-</div>
+<div ng-include src="'partials/shared/error-message.html'" ng-show="showErrorAlert"></div>
 <p>resourceowner@example.com</p>
 <div class="col-md-6 col-md-offset-3 panel panel-default login-panel">
   <div class="panel-heading">

@@ -7,10 +7,8 @@ angular.module('raceApp').controller('RaceListCtrl', function ($scope, Restangul
 
   // Making the first get request to api.
 
+  // $scope.loggedIn = authService.isLoggedIn();
 
-  $scope.loggedIn = authService.isLoggedIn();
-
-  //console.log(authService.isLoggedIn());
   makeRequest($scope);
 
   $scope.search = function() {
@@ -27,7 +25,8 @@ angular.module('raceApp').controller('RaceListCtrl', function ($scope, Restangul
     makeRequest($scope);
   }
 
-  $scope.imChanged = function() {
+  $scope.checkboxHasChanged = function() {
+    $scope.offset = 0;
     makeRequest($scope);
   }
 
@@ -59,7 +58,7 @@ angular.module('raceApp').controller('RaceListCtrl', function ($scope, Restangul
     Restangular.all('races').getList(queryParams).then(function(result) {
       $scope.races = result;
     }, function(response) {
-      // Show errors. 
+      // Show errors.
       if (response.data) {
         $scope.errorTextAlert = response.data.user_message;
       } else {

@@ -1,17 +1,86 @@
-<div>
-    <h1>{{race.name}}</h1>
-    <p>Längd: {{race.distance}}</p>
-    <p>Ort: {{race.location.city}}</p>
-    <p>Datum: {{race.date}}</p>
-    <p>Distans: {{race.distance}}</p>
-    <p>Webbsida: {{race.web_site}}</p>
-    <h3>Taggar</h3>
-    <ul data-ng-repeat="tagObject in race.tags">
-        <li>{{tagObject.tag.name}}</li>
-    </ul>
-
-    <a href="/"><< Tillbaka</a>
+<div ng-include src="'partials/shared/error-message.html'" ng-show="showErrorAlert"></div>
+<div ng-include src="'partials/shared/success-message.html'" ng-show="showSuccessAlert"></div>
+<!-- TODO: one partial for both error and success -->
+<div class="row" ng-show="isLoggedIn()">
+  <div class="col-md-12 panel panel-default race-menu">
+    <div class="panel-body">
+      <a href="#" ng-click="switchBool('wantsToEdit')" class="btn btn-default" ng-class="{'active':wantsToEdit}">Redigera lopp</a>
+      <a href="#" ng-click="delete()" class="btn btn-danger">Radera lopp</a>
+    </div>
+  </div>
 </div>
+<div class="row">
+  <!-- Show this if edit -->
+  <div ng-show="wantsToEdit" class="col-md-6 panel panel-default login-panel">
+    <div class="panel-heading">
+      <h2 class="panel-title">Redigera lopp</h2>
+    </div>
+    <form name="editRaceForm" class="panel-body">
+      <div class="form-group">
+        <label for="name">Namn: </label>
+        <input class="form-control" type="text" name="name" ng-model="race.name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="organiser">Organisatör: </label>
+        <input class="form-control" type="text" name="organiser" ng-model="race.organiser" required>
+      </div>
+
+      <div class="form-group">
+        <label for="city">Ort: </label>
+        <input class="form-control" type="text" name="city" ng-model="race.city" required>
+      </div>
+
+      <div class="form-group">
+        <label for="date">Datum: </label>
+        <input class="form-control" type="date" name="date" ng-model="race.date" required>
+      </div>
+
+      <div class="form-group">
+        <label for="distance">Längd i kilometer: </label>
+        <input class="form-control" type="text" name="distance" ng-model="race.distance" required>
+      </div>
+
+      <div class="form-group">
+        <label for="tags">Taggar: </label>
+        <input class="form-control" type="text" name="tags" ng-model="race.tag_list">
+      </div>
+
+      <div class="button-group">
+        <a href="/">Avbryt</a>
+        <button class="btn btn-primary" ng-click="edit()"
+          ng-disabled="editRaceForm.$invalid">Spara</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Show this if not edit -->
+  <div ng-show="!wantsToEdit" class="col-md-6 panel panel-default login-panel">
+    <div class="panel-heading">
+      <h2 class="panel-title">{{race.name}}</h2>
+    </div>
+    <ul class="list-group">
+      <li class="list-group-item">Ort: {{race.city}}</li>
+      <li class="list-group-item">Datum: {{race.date | date:'yyyy-MM-dd'}}</li>
+      <li class="list-group-item">Distans: {{race.distance}} km</li>
+      <li class="list-group-item">Webbsida: {{race.web_site}}</li>
+      <li ng-show="race.tags.length > 0" class="list-group-item">
+        <ul class="list-inline">
+          <li data-ng-repeat="tag in race.tags"><span class="badge">{{tag.tag.name}}</span></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-6 panel panel-default map">
+    <div class="panel-body">
+      karta här
+    </div>
+  </div>
+</div>
+<div class="row">
+  <a href="/"><< Tillbaka</a>
+</div>
+
 
 
 

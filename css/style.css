@@ -9,19 +9,19 @@ footer {
   text-align: left;
 }
 
+/*NAVBAR*/
+
 nav {
   margin-top: 20px;
+}
+
+nav .btn {
+  margin-left: 10px;
 }
 
 /* FORMS */
 label {
   display: block;
-}
-
-.form-ctrl {
-  height: 28px;
-  padding-left: 3px;
-  width: 300px;
 }
 
 .form-control {
@@ -39,6 +39,19 @@ label {
 .buttons button {
   margin-left: 10px;
 }
+
+/*.form-inline label {
+  display: inline-block;
+  width: 100px;
+}
+
+.form-inline .form-group {
+  margin: 6px 0;
+}
+
+.form-inline input {
+  width: 200px;
+}*/
 
 /*TABLE*/
 
@@ -90,4 +103,14 @@ input[type='checkbox'] {
 .panel-title {
   font-weight: 600;
   font-size: 18px;
+}
+
+
+/*RACE DETAILS*/
+.race-menu {
+  text-align: right;
+}
+
+.race-menu .btn {
+  margin-left: 10px;
 }
