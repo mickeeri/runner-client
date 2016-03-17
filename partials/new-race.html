@@ -3,42 +3,48 @@
   <div class="panel-heading">
     <h3 class="panel-title">Skapa nytt lopp</h3>
   </div>
-  <form name="newRaceForm" class="panel-body">
-    <div class="form-group">
+  <form name="raceForm" class="panel-body">
+    <div class="form-group" ng-class="{'has-error':raceForm.name.$invalid && raceForm.name.$touched}">
       <label for="name">Namn</label>
-      <input class="form-ctrl" type="text" name="name" ng-model="race.name" required>
+      <input class="form-control" type="text" name="name" ng-model="race.name" required>
+      <span class="help-block" ng-show="raceForm.name.$invalid && raceForm.name.$touched">Du måste ange namn.</span>
     </div>
 
-    <div class="form-group">
-      <label for="organiser">Organisatör</label>
-      <input class="form-ctrl" type="text" name="organiser" ng-model="race.organiser" required>
+    <div class="form-group" ng-class="{'has-error':raceForm.organiser.$invalid && raceForm.organiser.$touched}">
+      <label for="organiser">Arrangör</label>
+      <input class="form-control" type="text" name="organiser" ng-model="race.organiser" required>
+      <span class="help-block" ng-show="raceForm.organiser.$invalid && raceForm.name.$touched">Du måste ange arrangör.</span>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" ng-class="{'has-error':raceForm.city.$invalid && raceForm.city.$touched}">
       <label for="city">Ort</label>
-      <input class="form-ctrl" type="text" name="city" ng-model="race.city" required>
+      <input class="form-control" type="text" name="city" ng-model="race.city" required>
+      <span class="help-block" ng-show="raceForm.city.$invalid && raceForm.name.$touched">Du måste ange ort.</span>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" ng-class="{'has-error':raceForm.date.$invalid && raceForm.date.$touched}">
       <label for="date">Datum</label>
-      <input class="form-ctrl" type="date" name="date" ng-model="race.date" required>
+      <input class="form-control" type="date" name="date" ng-model="race.date" required>
+      <span class="help-block" ng-show="raceForm.name.$invalid && raceForm.name.$touched">Du måste ange ett giltigt datum.</span>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" ng-class="{'has-error':raceForm.distance.$invalid && raceForm.distance.$touched}">
       <label for="distance">Längd i kilometer</label>
-      <input class="form-ctrl" type="text" name="distance" ng-model="race.distance" required>
+      <input class="form-control" type="text" name="distance" ng-model="race.distance" required>
+      <span class="help-block" ng-show="raceForm.name.$invalid && raceForm.name.$touched">Du måste ange loppets distans i kilometer.</span>
     </div>
 
 
-    <div class="form-group">
+    <div class="form-group" ng-class="{'has-error':raceForm.tags.$invalid && raceForm.tags.$touched}">
       <label for="tags">Taggar<small> (skriv separerade med komma)</small></label>
-      <input class="form-ctrl" type="text" name="tags" ng-model="race.tag_list">
+      <input class="form-control" type="text" name="tags" ng-model="race.tag_list">
+      <span class="help-block" ng-show="raceForm.tags.$invalid && raceForm.name.$touched">Tags ogiltiga.</span>
     </div>
 
     <div class="button-group">
       <a href="/">Avbryt</a>
       <button class="btn btn-primary" ng-click="add()"
-        ng-disabled="newRaceForm.$invalid">Spara</button>
+        ng-disabled="raceForm.$invalid">Spara</button>
     </div>
   </form>
 </div>

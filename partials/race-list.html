@@ -1,9 +1,9 @@
 <div class="col-md-12">
   <div ng-include src="'partials/shared/error-message.html'" ng-show="showErrorAlert"></div>
-  <div class="form-group panel panel-default">
-    <div class="panel-body">
+  <div class="panel panel-default form-inline">
+    <div class="panel-body form-group">
       <label for="search">Sök på lopp: </label>
-      <input class="form-ctrl" name="search" type="text" ng-model="q">
+      <input class="form-control" name="search" type="search" ng-model="q">
       <button class="btn btn-primary" ng-click="search()">Sök</button>
       <button class="btn btn-default" ng-click="reset()">Återställ</button>
     </div>
