@@ -4,6 +4,8 @@ Det är är en applikation för springlopp utvecklad i AngularJS som hämtar dat
 
 För angular-applikationen behöver man någon form av http-server, t.ex. den som finns inbyggd i WebStorm. Jag använder en enkel variant ihop med [node.js](https://nodejs.org/en/). För att använda den: installera med `npm install -g http-server`, `cd` till projektet och kör `http-server -o`.
 
+Du kan behöva ändra följande [rad](https://github.com/me222wm/1dv450_me222wm_spa/blob/master/js/app.js#L24) så att den matchar adressen till din lokala server. 
+
 #### Inloggningsuppgifter
 Användare som har skapat flera lopp: 
 `E-post: resourceowner@example.com, Lösenord: password`
