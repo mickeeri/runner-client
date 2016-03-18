@@ -6,7 +6,7 @@ För angular-applikationen behöver man någon form av http-server, t.ex. den so
 
 #### Inloggningsuppgifter
 Användare som har skapat flera lopp: 
-`E-post: resourceowner@example.com", Lösenord: password`
+`E-post: resourceowner@example.com, Lösenord: password`
 
 Användare som inte har några lopp: 
 `E-post: notowner@example.com, Lösenord: secret`
