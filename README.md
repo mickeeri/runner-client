@@ -19,6 +19,7 @@ Användare som inte har några lopp:
 * Möjlighet att filtrera på sökfråga, taggar och paginering på samma gång. 
 * Ändrade visingen av ett lopp för att matcha hur det bör se ut när det skapas, vilket underlättar vid redigering. 
 * Installerade gemet rack-cors.
+* Möjlighet att filtrera på flera taggar genom att kombinera dem. Exempelvis: ("tag1+tag2").
 
 #### TODO: 
 * Samma formulär för både create och edit.
