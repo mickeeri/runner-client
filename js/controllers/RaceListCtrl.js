@@ -2,9 +2,9 @@ angular
   .module('raceApp')
   .controller('RaceListCtrl', RaceListCtrl);
 
-//RaceListCtrl.$inject = ['restangular', 'authService'];
+RaceListCtrl.$inject = ['$scope', 'Restangular'];
 
-function RaceListCtrl($scope, Restangular, authService) {
+function RaceListCtrl($scope, Restangular) {
 
   // Array of selected tags.
   $scope.selectedTags = [];

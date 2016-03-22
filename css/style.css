@@ -65,6 +65,7 @@ label {
 
 input[type='checkbox'] {
   margin-right: 3px;
+  cursor: pointer;
 }
 
 /*LOGIN PAGE*/

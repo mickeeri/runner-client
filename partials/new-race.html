@@ -35,6 +35,11 @@
         <span class="help-block" ng-show="raceForm.distance.$invalid && raceForm.distance.$touched">Du måste ange loppets distans i kilometer.</span>
       </div>
 
+      <div class="form-group" ng-class="{'has-error':raceForm.web_site.$invalid && raceForm.web_site.$touched}">
+        <label for="distance">Webbsida</label>
+        <input class="form-control" type="url" name="web_site" ng-model="race.web_site">
+        <span class="help-block" ng-show="raceForm.web_site.$invalid && raceForm.web_site.$touched">Ange en giltig url.</span>
+      </div>
 
       <div class="form-group" ng-class="{'has-error':raceForm.tags.$invalid && raceForm.tags.$touched}">
         <label for="tags">Taggar<small> (skriv separerade med komma)</small></label>

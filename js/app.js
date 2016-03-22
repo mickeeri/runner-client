@@ -1,6 +1,7 @@
 angular
   .module('raceApp', ['restangular', 'ngRoute', 'checklist-model', 'LocalStorageModule'])
-  .config(function ($routeProvider, $locationProvider, RestangularProvider) {
+  .config(['$routeProvider', '$locationProvider', 'RestangularProvider',
+    function ($routeProvider, $locationProvider, RestangularProvider) {
     $routeProvider.
         when('/', {
           controller: 'RaceListCtrl',
@@ -21,7 +22,7 @@ angular
         otherwise({redirectTo: '/'});
       $locationProvider.html5Mode(true);
 
-    RestangularProvider.setBaseUrl('http://localhost:3000/api/v1/');
+    RestangularProvider.setBaseUrl('https://peaceful-woodland-85717.herokuapp.com//api/v1/');
     RestangularProvider.setDefaultRequestParams({ api_key: 'cf46dd8a63811111469ea022d320f51f' });
     RestangularProvider.setDefaultHeaders({ Accept: 'application/json'});
     RestangularProvider.addResponseInterceptor(function(data, operation, what, url, respond, deferred) {
@@ -53,11 +54,14 @@ angular
       }
       return elem;
     })
-  })
+  }])
   .config(function(localStorageServiceProvider) {
     // Configuration for angular-local-storage module.
     localStorageServiceProvider
       .setPrefix('raceApp')
       .setStorageType('sessionStorage')
       .setNotify(true, true)
+  }).
+  constant('LocalStorageConstants', {
+    'jwtKey' : 'jwt'
   });

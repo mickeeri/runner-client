@@ -2,17 +2,19 @@ angular
   .module('raceApp')
   .controller('MainCtrl', MainCtrl);
 
-function MainCtrl($scope, localStorageService, authService) {
+MainCtrl.$inject = ['$scope', 'AuthService']
+
+function MainCtrl($scope, AuthService) {
 
   $scope.errorTextAlert;
   $scope.showErrorAlert;
   $scope.showSuccessAlert;
 
   $scope.isLoggedIn = function() {
-    return localStorageService.get('jwt') != undefined;
+    return AuthService.isLoggedIn;
   }
 
   $scope.logout = function() {
-    authService.logout();
+    AuthService.logout();
   }
 }

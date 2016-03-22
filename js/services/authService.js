@@ -1,15 +1,22 @@
-angular.module('raceApp').factory('authService', function(localStorageService) {
-  return {
-    getAuthToken: function() {
-      return localStorageService.get('jwt');
-    },
+angular
+  .module('raceApp')
+  .factory('AuthService', AuthService);
 
-    isLoggedIn: function() {
-      return localStorageService.get('jwt') != undefined;
-    },
+  AuthService.$inject = ['localStorageService'];
 
-    logout: function() {
-      localStorageService.remove('jwt');
+  function AuthService (localStorageService) {
+
+    return {
+      getAuthToken: function() {
+        return localStorageService.get('jwt');
+      },
+
+      isLoggedIn: function() {
+        return localStorageService.get('jwt') != undefined;
+      },
+
+      logout: function() {
+        localStorageService.remove('jwt');
+      }
     }
   }
-});

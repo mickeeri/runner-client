@@ -2,7 +2,7 @@ angular
   .module('raceApp')
   .controller('RaceDetailsCtrl', RaceDetailsCtrl);
 
-//RaceDetailsCtrl.$inject = ['$routeParams', 'restangular', 'authService']
+RaceDetailsCtrl.$inject = ['$routeParams', 'restangular', 'authService']
 
 function RaceDetailsCtrl($scope, $location, $routeParams, Restangular, authService) {
 

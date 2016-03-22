@@ -42,6 +42,11 @@
         <label for="distance">Längd i kilometer: </label>
         <input class="form-control" type="text" name="distance" ng-model="race.distance" required>
       </div>
+<!-- 
+      <div class="form-group">
+        <label for="web-site">Webbsida: </label>
+        <input class="form-control" type="text" name="distance" ng-model="race.distance" required>
+      </div> -->
 
       <div class="form-group">
         <label for="tags">Taggar: </label>
@@ -66,7 +71,7 @@
       <li class="list-group-item">Ort: {{race.city}}</li>
       <li class="list-group-item">Datum: {{race.date | date:'yyyy-MM-dd'}}</li>
       <li class="list-group-item">Distans: {{race.distance}} km</li>
-      <li class="list-group-item"><a href="{{race.web_site}}">Loppets webbsida</a></li>
+      <li ng-show="race.website !== undefined" class="list-group-item"><a href="{{race.web_site}}">Loppets webbsida</a></li>
       <li class="list-group-item">{{race.tag_list}}</li>
     </ul>
   </div>

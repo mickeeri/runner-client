@@ -23,7 +23,6 @@ angular.module("raceApp").directive('dlKeyCode', dlKeyCode);
             $scope.$apply(function() {
               $scope.$eval($attrs.dlKeyCode, {$event: event});
             });
-
           }
         });
       }
