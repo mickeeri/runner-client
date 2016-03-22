@@ -16,14 +16,20 @@ function RaceDetailsCtrl($scope, $location, $routeParams, Restangular, AuthServi
         // Converting to datetime object.
         result.date = new Date(result.date);
         result.tag_list = result.tag_list.join(', ');
-        $scope.race = result;
         generateMap(result.longitude, result.latitude);
+        // setNearbyRaces(result.city);
+        console.log(result);
+        $scope.race = result;
     });
   }
 
-  function getNearbyRaces() {
-    
-  }
+  // function setNearbyRaces(city) {
+  //   var nearbyRaces =  Restangular.all('races').getList({near:city}).then(function(result) {
+  //     $scope.nearByRaces = result;
+  //   }, function(){
+  //     console.log("Error when getting nearby races");
+  //   });
+  // }
 
   // Generating map with leaflet plugin.
   function generateMap(longitude, latitude) {

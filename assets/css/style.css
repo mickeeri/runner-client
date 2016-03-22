@@ -114,6 +114,16 @@ input[type='checkbox'] {
   padding: 0
 }
 
+.nearby-races-list {
+  padding: 0;
+  list-style-type: none;
+}
+
+.nearby-races-list li {
+  display: inline-block;
+  margin-left: 10px;
+}
+
 /*MAP*/
 
 .map {
@@ -123,4 +133,9 @@ input[type='checkbox'] {
 
 #map {
   height: 100%;
+}
+
+/*MISC*/
+.no-padding {
+  padding: 0;
 }
