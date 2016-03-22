@@ -74,24 +74,25 @@ input[type='checkbox'] {
 }
 
 /*LOGIN PAGE*/
-.login-panel {
+.form-panel {
   padding: 0;
 }
 
-.login-panel .panel-body {
+.form-panel .panel-body {
   padding: 20px 40px;
 }
 
-.login-panel input {
+.form-panel input {
   width: 100%;
 }
 
-.login-panel .button-group {
+.form-panel .button-group {
   text-align: right;
 }
 
 .login-panel .button-group button {
   margin-left: 10px;
+  margin-right: 10px;
 }
 
 .panel-title {

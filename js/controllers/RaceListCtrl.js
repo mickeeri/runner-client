@@ -38,11 +38,7 @@ function RaceListCtrl($scope, Restangular) {
     $scope.q = '';
     makeRequest($scope);
   }
-
-  $scope.switchBool = function(value) {
-     $scope[value] = !$scope[value];
-  };
-
+  
   function makeRequest($scope) {
     var queryParams = new Object();
 

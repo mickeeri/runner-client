@@ -5,15 +5,12 @@ angular
 CreateRaceCtrl.$inject = ['$scope', '$location', 'Restangular', 'AuthService'];
 
 function CreateRaceCtrl($scope, $location, Restangular, AuthService) {
+  var vm = this;
 
-  $scope.switchBool = function(value) {
-    $scope[value] = !$scope[value];
-  };
-
-  $scope.add = function() {
+  vm.add = function() {
     var authHeaderValue = 'Bearer '+AuthService.getAuthToken();
 
-    Restangular.all('races').post($scope.race, '', {'Authorization': authHeaderValue}).then(function(race) {
+    Restangular.all('races').post(vm, '', {'Authorization': authHeaderValue}).then(function(race) {
       $scope.successTextAlert = "Lopp skapat!";
       $scope.showSuccessAlert = true;
       $location.path(race.self_path);

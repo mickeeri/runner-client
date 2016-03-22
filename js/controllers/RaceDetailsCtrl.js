@@ -5,40 +5,33 @@ angular
 RaceDetailsCtrl.$inject = ['$scope', '$location', '$routeParams', 'Restangular', 'AuthService']
 
 function RaceDetailsCtrl($scope, $location, $routeParams, Restangular, AuthService) {
-
-
-  getRace();
+  var vm = this;
   var map = new L.map('map');
+  getRace();
 
-  function getRace() {
+  function getRace(){
     // Get one race with restangular.
     Restangular.one('races', $routeParams.id).get().then(function(result){
-        // Converting to datetime object.
-        result.date = new Date(result.date);
-        result.tag_list = result.tag_list.join(', ');
-        generateMap(result.longitude, result.latitude);
-        // setNearbyRaces(result.city);
-        console.log(result);
-        $scope.race = result;
+      // Converting to datetime object.
+      result.date = new Date(result.date);
+      result.tag_list = result.tag_list.join(', ');
+      generateMap(result.longitude, result.latitude);
+      $scope.race = result;
+    }, function(response) {
+      console.log(response);
     });
   }
 
-  // function setNearbyRaces(city) {
-  //   var nearbyRaces =  Restangular.all('races').getList({near:city}).then(function(result) {
-  //     $scope.nearByRaces = result;
-  //   }, function(){
-  //     console.log("Error when getting nearby races");
-  //   });
-  // }
-
   // Generating map with leaflet plugin.
   function generateMap(longitude, latitude) {
-    map.setView([latitude, longitude], 13);
-    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
+    if (longitude && latitude) {
+      map.setView([latitude, longitude], 13);
+      L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
 
-    L.marker([latitude, longitude]).addTo(map)
+      L.marker([latitude, longitude]).addTo(map)
+    }
   }
 
   // True if user wants to edit race.
@@ -46,7 +39,7 @@ function RaceDetailsCtrl($scope, $location, $routeParams, Restangular, AuthServi
 
   var authHeaderValue = 'Bearer '+AuthService.getAuthToken();
 
-  //
+  // Toogle if user wants to edit or not.
   $scope.switchWantsToEdit = function() {
     if ($scope.wantsToEdit === false) {
       $scope.wantsToEdit = true;
@@ -58,7 +51,7 @@ function RaceDetailsCtrl($scope, $location, $routeParams, Restangular, AuthServi
   }
 
   $scope.edit = function() {
-    $scope.race.put('', {'Authorization': authHeaderValue}).then(function(result) {
+    $scope.race.put(undefined, {'Authorization': authHeaderValue}).then(function(result) {
       $scope.wantsToEdit = false;
       $scope.successTextAlert = "Lopp uppdaterat!";
       $scope.showSuccessAlert = true;
@@ -92,8 +85,4 @@ function RaceDetailsCtrl($scope, $location, $routeParams, Restangular, AuthServi
       $scope.showErrorAlert = true;
     });
   }
-
-  $scope.switchBool = function(value) {
-    $scope[value] = !$scope[value];
-  };
 }

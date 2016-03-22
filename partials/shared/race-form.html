@@ -1,0 +1,55 @@
+<form name="raceForm">
+  <div class="form-group" ng-class="{'has-error':raceForm.name.$invalid && raceForm.name.$touched}">
+    <label for="name">Namn</label>
+    <input class="form-control" type="text" name="name" ng-model="race.name" required>
+    <span class="help-block" ng-show="raceForm.name.$invalid && raceForm.name.$touched">Du måste ange namn.</span>
+  </div>
+
+  <div class="form-group" ng-class="{'has-error':raceForm.organiser.$invalid && raceForm.organiser.$touched}">
+    <label for="organiser">Arrangör</label>
+    <input class="form-control" type="text" name="organiser" ng-model="race.organiser" required>
+    <span class="help-block" ng-show="raceForm.organiser.$invalid && raceForm.organiser.$touched">Du måste ange arrangör.</span>
+  </div>
+
+  <div class="form-group" ng-class="{'has-error':raceForm.city.$invalid && raceForm.city.$touched}">
+    <label for="city">Ort</label>
+    <input class="form-control" type="text" name="city" ng-model="race.city" required>
+    <span class="help-block" ng-show="raceForm.city.$invalid && raceForm.city.$touched">Du måste ange ort.</span>
+  </div>
+
+  <div class="form-group" ng-class="{'has-error':raceForm.date.$invalid && raceForm.date.$touched}">
+    <label for="date">Datum</label>
+    <input class="form-control" type="date" name="date" ng-model="race.date" required>
+    <span class="help-block" ng-show="raceForm.date.$invalid && raceForm.date.$touched">Du måste ange ett giltigt datum.</span>
+  </div>
+
+  <div class="form-group" ng-class="{'has-error':raceForm.distance.$invalid && raceForm.distance.$touched}">
+    <label for="distance">Längd i kilometer</label>
+    <input class="form-control" type="text" name="distance" ng-model="race.distance" required>
+    <span class="help-block" ng-show="raceForm.distance.$invalid && raceForm.distance.$touched">Du måste ange loppets distans i kilometer.</span>
+  </div>
+
+  <div class="form-group" ng-class="{'has-error':raceForm.web_site.$invalid && raceForm.web_site.$touched}">
+    <label for="distance">Webbsida</label>
+    <input class="form-control" type="url" name="web_site" ng-model="race.web_site">
+    <span class="help-block" ng-show="raceForm.web_site.$invalid && raceForm.web_site.$touched">Ange en giltig url.</span>
+  </div>
+
+  <div class="form-group" ng-class="{'has-error':raceForm.tags.$invalid && raceForm.tags.$touched}">
+    <label for="tags">Taggar<small> (skriv separerade med komma)</small></label>
+    <input class="form-control" type="text" name="tags" ng-model="race.tag_list">
+    <span class="help-block" ng-show="raceForm.tags.$invalid && raceForm.tags.$touched">Tags ogiltiga.</span>
+  </div>
+
+  <div ng-show="wantsToEdit" class="button-group">
+    <a href="#" ng-click="switchWantsToEdit()">Avbryt</a>
+    <button class="btn btn-primary" ng-click="edit()"
+      ng-disabled="raceForm.$invalid">Spara</button>
+  </div>
+
+  <div ng-show="!wantsToEdit" class="button-group">
+    <a href="/">Avbryt</a>
+    <button class="btn btn-primary" ng-click="race.add()"
+      ng-disabled="raceForm.$invalid">Spara</button>
+  </div>
+</form>

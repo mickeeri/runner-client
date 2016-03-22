@@ -9,11 +9,18 @@ angular
         }).
         when('/race/:id', {
             controller: 'RaceDetailsCtrl',
-            templateUrl: 'partials/race-details.html'
+            templateUrl: 'partials/race-details.html',
+            controllerAs: 'race',
+            resolve: {
+              race: function(Restangular, $route){
+                return Restangular.one('races', $route.current.params.id).get();
+              }
+            }
         }).
         when('/new', {
           controller: 'CreateRaceCtrl',
-          templateUrl: 'partials/new-race.html'
+          templateUrl: 'partials/new-race.html',
+          controllerAs: 'race'
         }).
         when('/login', {
           controller: 'LoginCtrl',
@@ -22,7 +29,7 @@ angular
         otherwise({redirectTo: '/'});
       $locationProvider.html5Mode(true);
 
-    RestangularProvider.setBaseUrl('https://peaceful-woodland-85717.herokuapp.com//api/v1/');
+    RestangularProvider.setBaseUrl('https://peaceful-woodland-85717.herokuapp.com/api/v1/');
     RestangularProvider.setDefaultRequestParams({ api_key: 'cf46dd8a63811111469ea022d320f51f' });
     RestangularProvider.setDefaultHeaders({ Accept: 'application/json'});
     RestangularProvider.addResponseInterceptor(function(data, operation, what, url, respond, deferred) {
@@ -48,8 +55,10 @@ angular
       if (operation === 'put') {
         // Elements that I don't want in put request.
         elem.self_path = undefined;
+        elem.self_url = undefined;
         elem.latitude = undefined;
         elem.longitude = undefined;
+        elem.nearby_races = undefined;
         return elem;
       }
       return elem;

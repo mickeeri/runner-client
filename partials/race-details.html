@@ -13,56 +13,15 @@
 </div>
 <div class="row">
   <!-- Show this if edit -->
-  <div ng-show="wantsToEdit" class="col-md-6 panel panel-default">
+  <div ng-show="wantsToEdit" class="col-md-6 panel panel-default form-panel">
     <div class="panel-heading">
       <h2 class="panel-title">Redigera lopp</h2>
     </div>
-    <form name="editRaceForm" class="panel-body">
-      <div class="form-group">
-        <label for="name">Namn: </label>
-        <input class="form-control" type="text" name="name" ng-model="race.name" required>
-      </div>
-
-      <div class="form-group">
-        <label for="organiser">Arrangör: </label>
-        <input class="form-control" type="text" name="organiser" ng-model="race.organiser" required>
-      </div>
-
-      <div class="form-group">
-        <label for="city">Ort: </label>
-        <input class="form-control" type="text" name="city" ng-model="race.city" required>
-      </div>
-
-      <div class="form-group">
-        <label for="date">Datum: </label>
-        <input class="form-control" type="date" name="date" ng-model="race.date" required>
-      </div>
-
-      <div class="form-group">
-        <label for="distance">Längd i kilometer: </label>
-        <input class="form-control" type="text" name="distance" ng-model="race.distance" required>
-      </div>
-<!--
-      <div class="form-group">
-        <label for="web-site">Webbsida: </label>
-        <input class="form-control" type="text" name="distance" ng-model="race.distance" required>
-      </div> -->
-
-      <div class="form-group">
-        <label for="tags">Taggar: </label>
-        <input class="form-control" type="text" name="tags" ng-model="race.tag_list">
-      </div>
-
-      <div class="button-group">
-        <a href="#" ng-click="switchWantsToEdit()">Avbryt</a>
-        <button class="btn btn-primary" ng-click="edit()"
-          ng-disabled="editRaceForm.$invalid">Spara</button>
-      </div>
-    </form>
+    <div class="panel-body" ng-include="'partials/shared/race-form.html'"></div>
   </div>
 
   <!-- Show this if not edit -->
-  <div ng-show="!wantsToEdit" class="col-md-6 panel panel-default race-panel">
+  <div ng-show="!race.wantsToEdit" class="col-md-6 panel panel-default race-panel">
     <div class="panel-heading">
       <h2 class="panel-title">{{race.name}}</h2>
     </div>
@@ -71,7 +30,7 @@
       <li class="list-group-item">Ort: {{race.city}}</li>
       <li class="list-group-item">Datum: {{race.date | date:'yyyy-MM-dd'}}</li>
       <li class="list-group-item">Distans: {{race.distance}} km</li>
-      <li ng-show="race.website !== undefined" class="list-group-item"><a href="{{race.web_site}}">Loppets webbsida</a></li>
+      <li ng-show="race.web_site" class="list-group-item"><a target="_blank" href="{{race.web_site}}">Loppets webbsida</a></li>
       <li class="list-group-item">{{race.tag_list}}</li>
     </ul>
   </div>
