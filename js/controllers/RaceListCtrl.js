@@ -60,6 +60,7 @@ function RaceListCtrl($scope, Restangular) {
 
     Restangular.all('races').getList(queryParams).then(function(result) {
       $scope.races = result;
+      $scope.loaded = true;
     }, function(response) {
       // Show errors.
       if (response.data) {

@@ -2,7 +2,9 @@ angular
   .module('raceApp')
   .controller('LoginCtrl', LoginCtrl);
 
-function LoginCtrl($scope, $location, Restangular, localStorageService, authService) {
+LoginCtrl.$inject = ['$scope', '$location', 'Restangular', 'localStorageService', 'AuthService']
+
+function LoginCtrl($scope, $location, Restangular, localStorageService, AuthService) {
 
   $scope.switchBool = function(value) {
     $scope[value] = !$scope[value];
@@ -26,7 +28,7 @@ function LoginCtrl($scope, $location, Restangular, localStorageService, authServ
         $scope.errorTextAlert = "Serverfel. Försök igen senare.";
       }
       $scope.showErrorAlert = true;
-      authService.logout();
+      AuthService.logout();
     });
   }
 }

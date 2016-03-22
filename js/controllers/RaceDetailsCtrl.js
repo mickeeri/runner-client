@@ -2,22 +2,32 @@ angular
   .module('raceApp')
   .controller('RaceDetailsCtrl', RaceDetailsCtrl);
 
-RaceDetailsCtrl.$inject = ['$routeParams', 'restangular', 'authService']
+RaceDetailsCtrl.$inject = ['$scope', '$location', '$routeParams', 'Restangular', 'AuthService']
 
-function RaceDetailsCtrl($scope, $location, $routeParams, Restangular, authService) {
+function RaceDetailsCtrl($scope, $location, $routeParams, Restangular, AuthService) {
 
-  // Get one race with restangular.
-  Restangular.one('races', $routeParams.id).get().then(function(result){
-      // Converting to datetime object.
-      result.date = new Date(result.date);
-      result.tag_list = result.tag_list.join(', ');
-      $scope.race = result;
-      generateMap(result.longitude, result.latitude);
-  });
+
+  getRace();
+  var map = new L.map('map');
+
+  function getRace() {
+    // Get one race with restangular.
+    Restangular.one('races', $routeParams.id).get().then(function(result){
+        // Converting to datetime object.
+        result.date = new Date(result.date);
+        result.tag_list = result.tag_list.join(', ');
+        $scope.race = result;
+        generateMap(result.longitude, result.latitude);
+    });
+  }
+
+  function getNearbyRaces() {
+    
+  }
 
   // Generating map with leaflet plugin.
   function generateMap(longitude, latitude) {
-    var map = L.map('map').setView([latitude, longitude], 13);
+    map.setView([latitude, longitude], 13);
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
@@ -26,15 +36,27 @@ function RaceDetailsCtrl($scope, $location, $routeParams, Restangular, authServi
   }
 
   // True if user wants to edit race.
-  $scope.wantsToEdit;
+  $scope.wantsToEdit = false;
 
-  var authHeaderValue = 'Bearer '+authService.getAuthToken();
+  var authHeaderValue = 'Bearer '+AuthService.getAuthToken();
+
+  //
+  $scope.switchWantsToEdit = function() {
+    if ($scope.wantsToEdit === false) {
+      $scope.wantsToEdit = true;
+    } else {
+      // If aborted edit. Get the original race again.
+      $scope.wantsToEdit = false;
+      getRace();
+    }
+  }
 
   $scope.edit = function() {
     $scope.race.put('', {'Authorization': authHeaderValue}).then(function(result) {
       $scope.wantsToEdit = false;
       $scope.successTextAlert = "Lopp uppdaterat!";
       $scope.showSuccessAlert = true;
+      // Re-generate map.
       generateMap(result.longitude, result.latitude);
     }, function(response) {
       // Show errors.

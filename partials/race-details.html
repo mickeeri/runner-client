@@ -6,7 +6,7 @@
 <div class="row" ng-show="isLoggedIn()">
   <div class="col-md-12 panel panel-default race-menu">
     <div class="panel-body">
-      <a href="#" ng-click="switchBool('wantsToEdit')" class="btn btn-default" ng-class="{'active':wantsToEdit}">Redigera lopp</a>
+      <a href="#" ng-click="switchWantsToEdit()" class="btn btn-default" ng-class="{'active':wantsToEdit}">Redigera lopp</a>
       <a href="#" ng-click="delete()" class="btn btn-danger">Radera lopp</a>
     </div>
   </div>
@@ -42,7 +42,7 @@
         <label for="distance">Längd i kilometer: </label>
         <input class="form-control" type="text" name="distance" ng-model="race.distance" required>
       </div>
-<!-- 
+<!--
       <div class="form-group">
         <label for="web-site">Webbsida: </label>
         <input class="form-control" type="text" name="distance" ng-model="race.distance" required>
@@ -54,7 +54,7 @@
       </div>
 
       <div class="button-group">
-        <a href="#" ng-click="wantsToEdit = false">Avbryt</a>
+        <a href="#" ng-click="switchWantsToEdit()">Avbryt</a>
         <button class="btn btn-primary" ng-click="edit()"
           ng-disabled="editRaceForm.$invalid">Spara</button>
       </div>

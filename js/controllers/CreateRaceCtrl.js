@@ -2,14 +2,16 @@ angular
   .module('raceApp')
   .controller('CreateRaceCtrl', CreateRaceCtrl);
 
-function CreateRaceCtrl($scope, $location, Restangular, authService) {
+CreateRaceCtrl.$inject = ['$scope', '$location', 'Restangular', 'AuthService'];
+
+function CreateRaceCtrl($scope, $location, Restangular, AuthService) {
 
   $scope.switchBool = function(value) {
     $scope[value] = !$scope[value];
   };
 
   $scope.add = function() {
-    var authHeaderValue = 'Bearer '+authService.getAuthToken();
+    var authHeaderValue = 'Bearer '+AuthService.getAuthToken();
 
     Restangular.all('races').post($scope.race, '', {'Authorization': authHeaderValue}).then(function(race) {
       $scope.successTextAlert = "Lopp skapat!";

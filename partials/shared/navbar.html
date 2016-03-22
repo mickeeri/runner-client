@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <a href="/" class="navbar-brand">Svenska löpartävlingar</a>
     <a ng-show="!isLoggedIn()" href="/login" class="btn btn-default navbar-btn pull-right">Logga in</a>
-    <a href="#" ng-click="logout()" ng-if="isLoggedIn()" class="btn btn-default navbar-btn pull-right">Logga ut</a>
-    <a href="/new" ng-if="isLoggedIn()" class="btn btn-success navbar-btn pull-right">Lägg till nytt lopp</a>
+    <a href="#" ng-click="logout()" ng-show="isLoggedIn()" class="btn btn-default navbar-btn pull-right">Logga ut</a>
+    <a href="/new" ng-show="isLoggedIn()" class="btn btn-success navbar-btn pull-right">Lägg till nytt lopp</a>
   </div>
 </nav>

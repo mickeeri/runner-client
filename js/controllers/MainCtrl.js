@@ -11,7 +11,7 @@ function MainCtrl($scope, AuthService) {
   $scope.showSuccessAlert;
 
   $scope.isLoggedIn = function() {
-    return AuthService.isLoggedIn;
+    return AuthService.isLoggedIn();
   }
 
   $scope.logout = function() {
