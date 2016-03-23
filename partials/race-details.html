@@ -1,4 +1,4 @@
-<div class="row" ng-show="isLoggedIn()">
+<div class="row" ng-show="isLoggedIn() && correctUser(race.owner)">
   <div class="col-md-12 panel panel-default race-menu">
     <div class="panel-body">
       <button ng-click="switchWantsToEdit()" class="btn btn-default" ng-class="{'active':wantsToEdit}">Redigera lopp</button>
@@ -48,7 +48,7 @@
       <li class="list-group-item">Datum: {{race.date | date:'yyyy-MM-dd'}}</li>
       <li class="list-group-item">Distans: {{race.distance}} km</li>
       <li ng-show="race.web_site" class="list-group-item"><a target="_blank" href="{{race.web_site}}">Loppets webbsida</a></li>
-      <li class="list-group-item">{{race.tag_list}}</li>
+      <li class="list-group-item">Taggar: {{race.tag_list}}</li>
     </ul>
   </div>
   <div class="col-md-6 panel panel-default map">

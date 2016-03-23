@@ -53,6 +53,7 @@ angular
         elem.latitude = undefined;
         elem.longitude = undefined;
         elem.nearby_races = undefined;
+        elem.owner = undefined;
         return elem;
       }
       return elem;
@@ -66,5 +67,6 @@ angular
       .setNotify(true, true)
   }).
   constant('LocalStorageConstants', {
-    'jwtKey' : 'jwt'
+    'jwtKey' : 'jwt',
+    'currentUserKey' : 'currentUser'
   });

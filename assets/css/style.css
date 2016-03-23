@@ -59,9 +59,9 @@ label {
 
 /*TAGS*/
 
-.tag-list label {
-  display: inline;
-  padding-left: 2px;
+.tag-div {
+  display: inline-block;
+  padding: 0 5px;
   cursor: pointer;
 }
 
@@ -69,9 +69,13 @@ label {
   margin-bottom: 0;
 }
 
-input[type='checkbox'] {
-  margin-right: 3px;
+.tag-div label {
   cursor: pointer;
+}
+
+input[type='checkbox']{
+  cursor: pointer;
+  margin-right: 2px;
 }
 
 /*LOGIN PAGE*/

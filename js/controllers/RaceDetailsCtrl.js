@@ -5,7 +5,7 @@ angular
 RaceDetailsCtrl.$inject = ['$scope', '$location', '$routeParams', 'Restangular', 'AuthService']
 
 function RaceDetailsCtrl($scope, $location, $routeParams, Restangular, AuthService) {
-  $scope.$parent.init();
+  $scope.$parent.resetMessages();
   var vm = this;
   var map = new L.map('map');
   getRace();
@@ -58,6 +58,8 @@ function RaceDetailsCtrl($scope, $location, $routeParams, Restangular, AuthServi
   }
 
   $scope.edit = function() {
+    $scope.$parent.resetMessages();
+
     $scope.race.put(undefined, {'Authorization': authHeaderValue}).then(function(result) {
       $scope.wantsToEdit = false;
       $scope.$parent.successTextAlert = "Lopp uppdaterat!";
@@ -77,12 +79,13 @@ function RaceDetailsCtrl($scope, $location, $routeParams, Restangular, AuthServi
   }
 
   $scope.delete = function() {
+    $scope.$parent.resetMessages();
+
     $scope.race.remove('', {'Authorization': authHeaderValue}).then(function(result) {
       $scope.$parent.successTextAlert = "Lopp raderat!";
       $scope.$parent.showSuccessAlert = true;
       $scope.$parent.keepMessage = true;
       $location.path('/');
-
     }, function(response) {
       // Show errors.
       if (response.data) {
@@ -92,5 +95,10 @@ function RaceDetailsCtrl($scope, $location, $routeParams, Restangular, AuthServi
       }
       $scope.$parent.showErrorAlert = true;
     });
+  }
+
+  // Check if logged in user is owner of resource.
+  $scope.correctUser = function(owner) {
+    return owner === AuthService.getCurrentUser();
   }
 }

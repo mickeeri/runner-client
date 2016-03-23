@@ -5,13 +5,15 @@ angular
 LoginCtrl.$inject = ['$scope', '$location', 'Restangular', 'localStorageService', 'AuthService']
 
 function LoginCtrl($scope, $location, Restangular, localStorageService, AuthService) {
+  $scope.$parent.resetMessages();
 
   $scope.login = function() {
-    $scope.$parent.init();
+    $scope.$parent.resetMessages();
 
     Restangular.all('auth_token').post({'auth' : $scope.owner}).then(function(response) {
+      console.log($scope.owner);
       // Login and redirect to start.
-      AuthService.login(response.jwt);
+      AuthService.login(response.jwt, $scope.owner.email);
       $location.path('/');
     }, function(response) {
       // 404 best practice for failed authentification according to knock rails gem creator.

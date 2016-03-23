@@ -11,8 +11,9 @@ angular
         return localStorageService.get(LS.jwtKey);
       },
 
-      login: function(jwt) {
+      login: function(jwt, owner) {
         localStorageService.set(LS.jwtKey, jwt);
+        localStorageService.set('currentUser', owner)
       },
 
       isLoggedIn: function() {
@@ -21,6 +22,11 @@ angular
 
       logout: function() {
         localStorageService.remove(LS.jwtKey);
+        localStorageService.remove(LS.currentUserKey);
+      },
+
+      getCurrentUser() {
+        return localStorageService.get(LS.currentUserKey);
       }
     }
   }

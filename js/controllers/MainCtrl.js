@@ -5,7 +5,8 @@ angular
 MainCtrl.$inject = ['$scope', 'AuthService']
 
 function MainCtrl($scope, AuthService) {
-  $scope.init = function() {
+  $scope.resetMessages = function() {
+    // Reset error messages. Wait one time if keepMessage is true.
     if (!$scope.keepMessage) {
       $scope.successTextAlert = "";
       $scope.errorTextAlert = "";

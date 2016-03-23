@@ -6,23 +6,25 @@ CreateRaceCtrl.$inject = ['$scope', '$location', 'Restangular', 'AuthService'];
 
 function CreateRaceCtrl($scope, $location, Restangular, AuthService) {
   var vm = this;
-  $scope.$parent.init();
+  $scope.$parent.resetMessages();
 
   vm.add = function() {
-    var authHeaderValue = 'Bearer '+AuthService.getAuthToken();
+    $scope.$parent.resetMessages();
 
+    var authHeaderValue = 'Bearer '+AuthService.getAuthToken();
     Restangular.all('races').post(vm, '', {'Authorization': authHeaderValue}).then(function(race) {
-      $scope.successTextAlert = "Lopp skapat!";
-      $scope.showSuccessAlert = true;
+      $scope.$parent.successTextAlert = "Lopp skapat!";
+      $scope.$parent.showSuccessAlert = true;
+      $scope.$parent.keepMessage = true;
       $location.path(race.self_path);
     }, function(response) {
       // Show errors.
       if (response.data) {
-        $scope.errorTextAlert = response.data.user_message;
+        $scope.$parent.errorTextAlert = response.data.user_message;
       } else {
-        $scope.errorTextAlert = "Ett fel uppstod när loppet skulle raderas.";
+        $scope.$parent.errorTextAlert = "Ett fel uppstod när loppet skulle skapas.";
       }
-      $parentScope.showErrorAlert = true;
+      $scope.$parent.showErrorAlert = true;
     });
   }
 }

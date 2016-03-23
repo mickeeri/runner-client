@@ -11,8 +11,8 @@ function RaceListCtrl($scope, Restangular) {
   // Setting default limit and offset for paging.
   $scope.limit = 8;
   $scope.offset = 0;
-  // Reset the main controller. Resetting messages.
-  $scope.$parent.init();
+  // Reset messages in main controller.
+  $scope.$parent.resetMessages();
 
   // Initial request to api.
   makeRequest($scope);
@@ -53,6 +53,7 @@ function RaceListCtrl($scope, Restangular) {
       queryParams.q = $scope.q;
     }
 
+    // Make request with Restangular.
     Restangular.all('races').getList(queryParams).then(function(result) {
       $scope.races = result;
       $scope.loaded = true;

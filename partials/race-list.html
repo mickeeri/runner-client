@@ -9,9 +9,11 @@
   </form>
   <div class="tag-list panel panel-default">
     <div class="panel-body">
-      <label ng-repeat="tag in races.tags">
-        <input type="checkbox" checklist-model="selectedTags" checklist-value="tag.name" checklist-change="checkboxHasChanged()">{{tag.name}}
-      </label>
+      <div class="tag-div" ng-repeat="tag in races.tags">
+        <label>
+          <input type="checkbox" checklist-model="selectedTags" checklist-value="tag.name" checklist-change="checkboxHasChanged()">{{tag.name}}
+        </label>
+      </div>
     </div>
   </div>
   <div class="table-container panel panel-default">
