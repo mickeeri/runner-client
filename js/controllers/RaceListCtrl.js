@@ -11,6 +11,8 @@ function RaceListCtrl($scope, Restangular) {
   // Setting default limit and offset for paging.
   $scope.limit = 8;
   $scope.offset = 0;
+  // Reset the main controller. Resetting messages.
+  $scope.$parent.init();
 
   // Initial request to api.
   makeRequest($scope);
@@ -38,18 +40,15 @@ function RaceListCtrl($scope, Restangular) {
     $scope.q = '';
     makeRequest($scope);
   }
-  
-  function makeRequest($scope) {
-    var queryParams = new Object();
 
-    // Setting query parameters.
+  function makeRequest($scope) {
+    // Buildning query paramaters.
+    var queryParams = new Object();
     if ($scope.selectedTags.length > 0) {
       queryParams.tags = $scope.selectedTags.join('+');
     }
-
     queryParams.offset = $scope.offset;
     queryParams.limit = $scope.limit;
-
     if ($scope.q != undefined) {
       queryParams.q = $scope.q;
     }
@@ -60,11 +59,11 @@ function RaceListCtrl($scope, Restangular) {
     }, function(response) {
       // Show errors.
       if (response.data) {
-        $scope.errorTextAlert = response.data.user_message;
+        $scope.$parent.errorTextAlert = response.data.user_message;
       } else {
-        $scope.errorTextAlert = "Fel uppstod när data skulle hämtas från servern.";
+        $scope.$parent.errorTextAlert = "Fel uppstod när data skulle hämtas från servern.";
       }
-      $scope.showErrorAlert = true;
+      $scope.$parent.showErrorAlert = true;
     });
   }
 }

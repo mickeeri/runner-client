@@ -5,6 +5,7 @@ angular
 RaceDetailsCtrl.$inject = ['$scope', '$location', '$routeParams', 'Restangular', 'AuthService']
 
 function RaceDetailsCtrl($scope, $location, $routeParams, Restangular, AuthService) {
+  $scope.$parent.init();
   var vm = this;
   var map = new L.map('map');
   getRace();
@@ -18,7 +19,13 @@ function RaceDetailsCtrl($scope, $location, $routeParams, Restangular, AuthServi
       generateMap(result.longitude, result.latitude);
       $scope.race = result;
     }, function(response) {
-      console.log(response);
+      // Show errors.
+      if (response.data) {
+        $scope.$parent.errorTextAlert = response.data.user_message;
+      } else {
+        $scope.$parent.errorTextAlert = "Fel uppstod när data skulle hämtas från servern.";
+      }
+      $scope.$parent.showErrorAlert = true;
     });
   }
 
@@ -29,7 +36,6 @@ function RaceDetailsCtrl($scope, $location, $routeParams, Restangular, AuthServi
       L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
           attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       }).addTo(map);
-
       L.marker([latitude, longitude]).addTo(map)
     }
   }
@@ -37,6 +43,7 @@ function RaceDetailsCtrl($scope, $location, $routeParams, Restangular, AuthServi
   // True if user wants to edit race.
   $scope.wantsToEdit = false;
 
+  // Authorization-header that needs to be in every request.
   var authHeaderValue = 'Bearer '+AuthService.getAuthToken();
 
   // Toogle if user wants to edit or not.
@@ -53,36 +60,37 @@ function RaceDetailsCtrl($scope, $location, $routeParams, Restangular, AuthServi
   $scope.edit = function() {
     $scope.race.put(undefined, {'Authorization': authHeaderValue}).then(function(result) {
       $scope.wantsToEdit = false;
-      $scope.successTextAlert = "Lopp uppdaterat!";
-      $scope.showSuccessAlert = true;
+      $scope.$parent.successTextAlert = "Lopp uppdaterat!";
+      $scope.$parent.showSuccessAlert = true;
       // Re-generate map.
       generateMap(result.longitude, result.latitude);
     }, function(response) {
       // Show errors.
       if (response.data) {
-        $scope.errorTextAlert = response.data.user_message;
+        $scope.$parent.errorTextAlert = response.data.user_message;
       } else {
-        $scope.errorTextAlert = "Ett fel uppstod när loppet skulle uppdateras.";
+        $scope.$parent.errorTextAlert = "Ett fel uppstod när loppet skulle uppdateras.";
       }
-      $scope.wantsToEdit = false;
-      $scope.showErrorAlert = true;
+      $scope.wantsToEdit = true;
+      $scope.$parent.showErrorAlert = true;
     });
   }
 
   $scope.delete = function() {
     $scope.race.remove('', {'Authorization': authHeaderValue}).then(function(result) {
-      $scope.successTextAlert = "Lopp raderat!";
-      $scope.showSuccessAlert = true;
+      $scope.$parent.successTextAlert = "Lopp raderat!";
+      $scope.$parent.showSuccessAlert = true;
+      $scope.$parent.keepMessage = true;
       $location.path('/');
 
     }, function(response) {
       // Show errors.
       if (response.data) {
-        $scope.errorTextAlert = response.data.user_message;
+        $scope.$parent.errorTextAlert = response.data.user_message;
       } else {
-        $scope.errorTextAlert = "Ett fel uppstod när loppet skulle raderas.";
+        $scope.$parent.errorTextAlert = "Ett fel uppstod när loppet skulle raderas.";
       }
-      $scope.showErrorAlert = true;
+      $scope.$parent.showErrorAlert = true;
     });
   }
 }

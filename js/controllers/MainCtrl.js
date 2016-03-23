@@ -5,10 +5,17 @@ angular
 MainCtrl.$inject = ['$scope', 'AuthService']
 
 function MainCtrl($scope, AuthService) {
+  $scope.init = function() {
+    if (!$scope.keepMessage) {
+      $scope.successTextAlert = "";
+      $scope.errorTextAlert = "";
+      $scope.showErrorAlert = false;
+      $scope.showSuccessAlert = false;
+    }
+    $scope.keepMessage = false;
+  }
 
-  $scope.errorTextAlert;
-  $scope.showErrorAlert;
-  $scope.showSuccessAlert;
+  $scope.keepMessage = false;
 
   $scope.isLoggedIn = function() {
     return AuthService.isLoggedIn();

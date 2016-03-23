@@ -1,27 +1,44 @@
-<div class="row">
-  <div ng-include src="'partials/shared/error-message.html'" ng-show="showErrorAlert"></div>
-  <div ng-include src="'partials/shared/success-message.html'" ng-show="showSuccessAlert"></div>
-</div>
-<!-- TODO: one partial for both error and success -->
 <div class="row" ng-show="isLoggedIn()">
   <div class="col-md-12 panel panel-default race-menu">
     <div class="panel-body">
-      <a href="#" ng-click="switchWantsToEdit()" class="btn btn-default" ng-class="{'active':wantsToEdit}">Redigera lopp</a>
-      <a href="#" ng-click="delete()" class="btn btn-danger">Radera lopp</a>
+      <button ng-click="switchWantsToEdit()" class="btn btn-default" ng-class="{'active':wantsToEdit}">Redigera lopp</button>
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDeleteModal">
+        Radera lopp
+      </button>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Bekräfta borttagning av lopp</h4>
+      </div>
+      <div class="modal-body">
+        Är du säker på att du vill radera {{race.name}}?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Avbryt</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="delete()">Ja, ta bort lopp</button>
+      </div>
     </div>
   </div>
 </div>
 <div class="row">
   <!-- Show this if edit -->
-  <div ng-show="wantsToEdit" class="col-md-6 panel panel-default form-panel">
+  <div ng-if="wantsToEdit" class="col-md-6 panel panel-default form-panel">
     <div class="panel-heading">
       <h2 class="panel-title">Redigera lopp</h2>
     </div>
+    <!-- Form for edit race -->
     <div class="panel-body" ng-include="'partials/shared/race-form.html'"></div>
   </div>
 
   <!-- Show this if not edit -->
-  <div ng-show="!race.wantsToEdit" class="col-md-6 panel panel-default race-panel">
+  <div ng-if="!wantsToEdit" class="col-md-6 panel panel-default race-panel">
     <div class="panel-heading">
       <h2 class="panel-title">{{race.name}}</h2>
     </div>
@@ -39,9 +56,7 @@
     </div>
   </div>
 </div>
-
-</div>
-<div class="row">
+<div ng-if="race.nearby_races.length > 0" class="row">
   <div class="col-md-12 panel panel-default no-padding">
     <div class="panel-heading">
       <h3 class="panel-title">Närliggande lopp</h3>

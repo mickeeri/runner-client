@@ -6,29 +6,21 @@ LoginCtrl.$inject = ['$scope', '$location', 'Restangular', 'localStorageService'
 
 function LoginCtrl($scope, $location, Restangular, localStorageService, AuthService) {
 
-  $scope.switchBool = function(value) {
-    $scope[value] = !$scope[value];
-  };
-
   $scope.login = function() {
+    $scope.$parent.init();
+
     Restangular.all('auth_token').post({'auth' : $scope.owner}).then(function(response) {
-      var savedToLocalStorage = localStorageService.set('jwt', response.jwt);
-      // Redirect to start page if successfully saved jwt in local storage.
-      if (savedToLocalStorage) {
-        $location.path('/');
-      } else {
-        $scope.errorTextAlert = "Ett fel uppstod.";
-        $scope.showErrorAlert = true;
-      }
+      // Login and redirect to start.
+      AuthService.login(response.jwt);
+      $location.path('/');
     }, function(response) {
       // 404 best practice for failed authentification according to knock rails gem creator.
       if (response.status === 404) {
-        $scope.errorTextAlert = "Inloggning misslyckades. Felaktiga uppgifter.";
+        $scope.$parent.errorTextAlert = "Kunde inte hitta en användare med de uppgifterna.";
       } else {
-        $scope.errorTextAlert = "Serverfel. Försök igen senare.";
+        $scope.$parent.errorTextAlert = "Serverfel. Försök igen senare.";
       }
-      $scope.showErrorAlert = true;
-      AuthService.logout();
+      $scope.$parent.showErrorAlert = true;
     });
   }
 }

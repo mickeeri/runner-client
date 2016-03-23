@@ -6,6 +6,7 @@ CreateRaceCtrl.$inject = ['$scope', '$location', 'Restangular', 'AuthService'];
 
 function CreateRaceCtrl($scope, $location, Restangular, AuthService) {
   var vm = this;
+  $scope.$parent.init();
 
   vm.add = function() {
     var authHeaderValue = 'Bearer '+AuthService.getAuthToken();
@@ -21,7 +22,7 @@ function CreateRaceCtrl($scope, $location, Restangular, AuthService) {
       } else {
         $scope.errorTextAlert = "Ett fel uppstod när loppet skulle raderas.";
       }
-      $scope.showErrorAlert = true;
+      $parentScope.showErrorAlert = true;
     });
   }
 }

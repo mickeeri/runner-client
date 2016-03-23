@@ -9,13 +9,7 @@ angular
         }).
         when('/race/:id', {
             controller: 'RaceDetailsCtrl',
-            templateUrl: 'partials/race-details.html',
-            controllerAs: 'race',
-            resolve: {
-              race: function(Restangular, $route){
-                return Restangular.one('races', $route.current.params.id).get();
-              }
-            }
+            templateUrl: 'partials/race-details.html'
         }).
         when('/new', {
           controller: 'CreateRaceCtrl',
@@ -30,7 +24,7 @@ angular
       $locationProvider.html5Mode(true);
 
     RestangularProvider.setBaseUrl('https://peaceful-woodland-85717.herokuapp.com/api/v1/');
-    RestangularProvider.setDefaultRequestParams({ api_key: 'cf46dd8a63811111469ea022d320f51f' });
+    RestangularProvider.setDefaultRequestParams({ api_key: 'cf46dd8a63811111469ea022d320f51f'});
     RestangularProvider.setDefaultHeaders({ Accept: 'application/json'});
     RestangularProvider.addResponseInterceptor(function(data, operation, what, url, respond, deferred) {
       var extracedData;

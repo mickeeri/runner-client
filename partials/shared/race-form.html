@@ -1,4 +1,4 @@
-<form name="raceForm">
+<form name="raceForm" novalidate>
   <div class="form-group" ng-class="{'has-error':raceForm.name.$invalid && raceForm.name.$touched}">
     <label for="name">Namn</label>
     <input class="form-control" type="text" name="name" ng-model="race.name" required>
@@ -25,12 +25,12 @@
 
   <div class="form-group" ng-class="{'has-error':raceForm.distance.$invalid && raceForm.distance.$touched}">
     <label for="distance">Längd i kilometer</label>
-    <input class="form-control" type="text" name="distance" ng-model="race.distance" required>
+    <input class="form-control" type="number" name="distance" ng-model="race.distance" required>
     <span class="help-block" ng-show="raceForm.distance.$invalid && raceForm.distance.$touched">Du måste ange loppets distans i kilometer.</span>
   </div>
 
   <div class="form-group" ng-class="{'has-error':raceForm.web_site.$invalid && raceForm.web_site.$touched}">
-    <label for="distance">Webbsida</label>
+    <label for="web_site">Webbsida</label>
     <input class="form-control" type="url" name="web_site" ng-model="race.web_site">
     <span class="help-block" ng-show="raceForm.web_site.$invalid && raceForm.web_site.$touched">Ange en giltig url.</span>
   </div>
