@@ -7,7 +7,7 @@ För angular-applikationen behöver man någon form av http-server, t.ex. den so
 
 Sådant som skulle kunna vara betygshöjande är: 
 * 69 olika testfall till Rails-applikationen. 
-* Möjlighet att skapa taggar i samband med skapndet av händelse. 
+* Möjlighet att skapa taggar i samband med skapndet av händelser. 
 * Möjlihet att filtrera på sökfråga och flera taggar samtidigt. 
 * Autentisering med jwt. 
 * Paginering av resurser på klienten. 
