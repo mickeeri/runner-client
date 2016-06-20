@@ -1,6 +1,6 @@
 # Svenska löpartävlingar
 
-#### Övergripande om appliaktionen (registering, API och klient)
+#### Övergripande om applikationen (registering, API och klient)
 Det är är en applikation för springlopp utvecklad i AngularJS som hämtar data från ett api som finns i [det här repot](https://github.com/me222wm/1dv450_me222wm). Där finns även körinstruktioner om man vill använda servern lokalt. Nu finns det även en [publicerad version](https://peaceful-woodland-85717.herokuapp.com) som angular-appliaktionen använder sig av. 
 
 För angular-applikationen behöver man någon form av http-server, t.ex. den som finns inbyggd i WebStorm. Jag använder en enkel variant ihop med [node.js](https://nodejs.org/en/). För att använda den: installera med `npm install -g http-server`, `cd` till projektet och kör `http-server -o`.
